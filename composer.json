@@ -1,0 +1,97 @@
+{
+  "name": "laravel/laravel",
+  "type": "project",
+  "description": "The Laravel Framework.",
+  "keywords": [
+    "framework",
+    "laravel"
+  ],
+  "license": "MIT",
+  "require": {
+    "php": "^8.2",
+    "ext-fileinfo": "*",
+    "aws/aws-sdk-php": "^3.336",
+    "bensampo/laravel-embed": "^2.5",
+    "dasundev/livewire-dropzone": "^2.0",
+    "doctrine/dbal": "^3.0",
+    "guzzlehttp/guzzle": "^7.2",
+    "intervention/image": "^2.7",
+    "jantinnerezo/livewire-alert": "^3.0",
+    "laravel/framework": "^11.9",
+    "laravel/sanctum": "^4.0",
+    "laravel/tinker": "^2.9",
+    "league/flysystem-aws-s3-v3": "^3.0",
+    "livewire/livewire": "^3.5",
+    "merujan99/laravel-video-embed": "dev-master",
+    "opcodesio/log-viewer": "^3.12",
+    "predis/predis": "^2.3",
+    "pusher/pusher-php-server": "^7.2",
+    "sendgrid/sendgrid": "^8.1",
+    "sentry/sentry-laravel": "^4.13",
+    "spatie/laravel-stripe-webhooks": "^3.8",
+    "stripe/stripe-php": "^14.10",
+    "wire-elements/pro": "^4.0"
+  },
+  "require-dev": {
+    "fakerphp/faker": "^1.23",
+    "laravel/breeze": "^2.0",
+    "laravel/pint": "^1.16",
+    "laravel/sail": "^1.26",
+    "mockery/mockery": "^1.6",
+    "nunomaduro/collision": "^8.1",
+    "phpunit/phpunit": "^11.0.1",
+    "spatie/laravel-ignition": "^2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/",
+      "Database\\Factories\\": "database/factories/",
+      "Database\\Seeders\\": "database/seeders/"
+    },
+    "files": [
+      "app/Helper/Helpers.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "post-autoload-dump": [
+      "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+      "@php artisan package:discover --ansi"
+    ],
+    "post-update-cmd": [
+      "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+    ],
+    "post-root-package-install": [
+      "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+    ],
+    "post-create-project-cmd": [
+      "@php artisan key:generate --ansi"
+    ]
+  },
+  "extra": {
+    "laravel": {
+      "dont-discover": []
+    }
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "allow-plugins": {
+      "pestphp/pest-plugin": true,
+      "php-http/discovery": true
+    }
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wire-elements-pro.composer.sh"
+    }
+  ],
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}

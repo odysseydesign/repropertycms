@@ -1,0 +1,186 @@
+:root {
+    --primary-color: #28ADC4;
+}
+
+.main-banner img,
+.main-banner video {
+    height: 100vh;
+    object-fit: cover;
+}
+
+body,
+* {
+    font-family: 'Lato', sans-serif;
+}
+
+.property_price_section,
+.agent_name,
+.property-feature,
+.property-page-title {
+    font-family: 'Julius Sans One', sans-serif;
+}
+
+.site-color {
+    color: #ADADAD;
+}
+
+.address_bar {
+    background: #152636;
+}
+
+.property_amenities {
+    padding: 0px;
+    margin: 0px;
+    position: relative;
+    padding-left: 20px;
+}
+
+.ml-2 {
+    margin-left: .5rem;
+}
+
+.property_amenities svg {
+    position: absolute;
+    left: 0px;
+    top: 5px;
+}
+
+.propertydocument_section {
+    margin: 0px;
+    background-color: #fff;
+    margin-bottom: 20px;
+    box-shadow: 0px 3px 6px #0000001f;
+    white-space: normal;
+    word-break: break-all;
+    text-align: center;
+}
+
+.propertydocument_section .fa-2x {
+    margin-bottom: 15px;
+}
+
+.propertydocument_section .fa-regular {
+    color: #00c2ff;
+}
+
+h2 {
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.floor-plans {
+    position: relative;
+    /*height: 550px;*/
+    max-width: 800px;
+    margin: auto;
+}
+
+.gallery-default-image {
+    height: auto !important;
+}
+
+.floor-plans img.floorplan_tab {
+    /*height: 500px !important;*/
+    max-height: max-content !important;
+}
+
+#fllorplan_margin {
+    margin-top: 0px !important;
+}
+
+.floor-plans-main button {
+    margin: 0px;
+    border-radius: 4px;
+    background-color: #f5f5f5;
+}
+
+.floor-plans-main button {
+    margin: 0px 5px;
+}
+
+.floor-plans-main button:first-child {
+    margin-left: 0px;
+}
+
+.floor-plans-main button:last-child {
+    margin-right: 0px;
+}
+
+.floor-plans-main button:focus,
+.floor-plans-main button.active,
+.floor-plans-main button:hover {
+    outline: 0;
+    box-shadow: none;
+    color: #fff;
+    background-color: var(--primary-color);
+}
+
+.property_videos {
+    width: 100% !important;
+}
+
+.property_videos video {
+    width: 100%;
+}
+
+.agent-image img {
+    max-height: 500px;
+    max-width: 100%;
+}
+
+.propery-view .gallery-default-image img {
+    height: 500px;
+    object-fit: cover;
+}
+
+.main-banner img, .main-banner video {
+    height: 100vh !important;
+}
+
+.property_gallery_images {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+    .floor-plans {
+        height: 600px;
+    }
+}
+
+@media (max-width: 767px) {
+    .floor-plans {
+        height: 600px;
+    }
+
+    .propery-view .gallery-default-image img {
+        height: max-content;
+    }
+
+    .footer-image {
+        height: 250px;
+    }
+
+    .main-banner img, .main-banner video {
+        height: 300px !important;
+    }
+}
+
+.contact-form-block {
+    background: rgba(0, 0, 0, 0.5);
+    /*margin: 100px 0;*/
+    border-radius: 10px;
+}
+
+.footer-block p,
+.footer-block a {
+    color: #FFF;
+    margin-top: 20px;
+    font-family: 'Julius Sans One', sans-serif;
+}
+@media (min-width: 1900px) {
+    .propery-view .gallery-default-image img {
+        height: 800px;
+    }
+}

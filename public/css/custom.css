@@ -1,0 +1,759 @@
+/*
+green shade - #008a8f
+Blue Shade - #0069a6
+purple shade - #6f4693
+button blue - #1F7FBC
+*/
+
+/* Overriding the styles from material-tailwind - START */
+#propertyUrl {
+    color: #bbb9bb;
+}
+
+/* Enables smooth horizontal scrolling */
+.floor-plan-container {
+    overflow-x: auto;
+    white-space: nowrap;
+    max-width: 100%;
+}
+
+/* Ensures images are large but don't squeeze */
+.fp-image img {
+    max-width: none;
+    width: auto;
+}
+
+/* Allows users to pinch to zoom */
+.floorplan-img {
+    touch-action: pinch-zoom;
+}
+
+
+.input-group.focused.input-group-outline .form-label + .form-control,
+.input-group.is-filled.input-group-outline .form-label + .form-control {
+    /* border-color:#0000 #6f4693 #6f4693;
+    box-shadow:inset 1px 0 #6f4693,inset -1px 0 #6f4693,inset 0 -1px #6f4693; */
+    border-color: #0000 #cfd8dc #cfd8dc;
+    box-shadow: inset 1px 0 #cfd8dc, inset -1px 0 #cfd8dc, inset 0 -1px #cfd8dc;
+}
+
+.input-group.focused .form-label,
+.input-group.is-filled .form-label {
+    z-index: 1;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #0069a6;
+}
+
+.input-group.focused .form-label:after,
+.input-group.focused .form-label:before,
+.input-group.is-filled .form-label:after,
+.input-group.is-filled .form-label:before {
+    /* border-top-color: #6f4693;
+    box-shadow: inset 0 1px #6f4693; */
+    border-top-color: #cfd8dc;
+    box-shadow: inset 0 1px #cfd8dc;
+}
+
+.input-group.focused .form-label,
+.input-group.is-filled .form-label {
+    color: inherit
+}
+
+b,
+strong {
+    font-weight: 600;
+}
+
+/* Overriding the styles from material-tailwind - END */
+
+.ri-bg-blue {
+    background-color: #0069a6;
+}
+
+.ri-bg-green {
+    background-color: #008a8f;
+}
+
+.ri-bg-purple {
+    background-color: #6f4693;
+}
+
+.text-color-p {
+    color: #6f4693;
+}
+
+h4 {
+    font-size: 175%;
+    margin: 2% 0;
+    border-bottom: 2px dotted #dddddd;
+    padding-bottom: 10px;
+}
+
+.card-header h4 {
+    border-bottom: 0px;
+}
+
+.card-image-style {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+/* Table Styles - START */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table td {
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+}
+
+table th {
+    border: 1px solid #ddd;
+    padding: 15px 10px;
+}
+
+table tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+table tr:hover {
+    background-color: #ddd;
+}
+
+table th {
+    text-align: left;
+    background-color: #009390;
+    color: white;
+}
+
+/* apply background color white on  input, select, radio, checkbox, textarea   */
+input,
+select,
+textarea,
+.background-color {
+    background-color: white !important;
+}
+
+/* .button{
+    color: #bbb9bb !important;
+    background-color: white !important;
+    border: 1px solid grey !important;
+    box-shadow: 1px 1px 1px lightgrey !important;
+    background-image: none !important;
+}
+.button:hover{
+    box-shadow: 1px 1px 1px lightgrey !important;
+} */
+
+/* The css apply on generated summernote text area field  start */
+.note-editable {
+    background-color: white !important;
+}
+
+/* The css apply on generated summernote text area field  end */
+.p-1 {
+    padding: .625rem 1rem !important;
+}
+
+.h-100 {
+    height: 100%;
+}
+
+.btn-purple {
+    float: right;
+    margin-top: -6vh;
+    background-color: #6f4693;
+    font-weight: bold;
+    font-size: 15px;
+    color: white;
+}
+
+.button-logo-green {
+    background-color: #4ba8b1;
+    font-size: 14px;
+}
+
+.btn-blue {
+    float: right;
+    margin-top: -10vh;
+    background-color: rgb(0, 100, 131);
+    font-weight: bold;
+    font-size: 15px;
+    color: white;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+}
+
+table td .button {
+    margin-right: 10px;
+}
+
+/* end of Table Styles - END */
+
+.gallery-image {
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.property-next {
+    margin-top: 5%;
+    padding: 10px;
+    border-top: 2px dotted #dddddd;
+    text-align: right;
+    display: block;
+}
+
+.nbbar {
+    display: none;
+}
+
+#agents_sidebar {
+    width: 13%;
+    position: fixed;
+    height: 100%;
+    right: 100px;
+    background-color: #3d464e;
+}
+
+.agent_menu {
+    width: 100px;
+    height: 100%;
+    position: fixed;
+    right: 0px;
+    background-color: #333c44;
+}
+
+.agent_menu li {
+    text-align: center;
+}
+
+.agent_menu a {
+    padding: 30px 0px;
+    display: block;
+    font-size: 14px;
+    color: #f0f0f0;
+}
+
+.agent_menu i,
+.agent_menu svg {
+    display: block;
+    margin: 0px auto 5px;
+    font-size: 26px;
+}
+
+/* set width here for agent sign-in , forget-agent-password , reset-agent-password form section */
+
+.agentsign .agnet_logo img {
+    width: 60%;
+    margin: 0px auto;
+}
+
+.dialog .dialog-box {
+    max-width: 60%;
+}
+
+.sidebar li a {
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #f0f0f0;
+    font-size: 14px;
+}
+
+.sidebar li:hover {
+    background-color: rgba(3, 3, 3, 0.152);
+}
+
+.sidebar li a:hover {
+    color: rgba(255, 255, 255, 0.822);
+}
+
+.flash-div {
+    width: 30%;
+    margin: 1% 35%;
+    z-index: 1000;
+    position: absolute;
+    padding: 10px 20px;
+}
+
+.amenities {
+    background: lightgray;
+    border-radius: 5px;
+    padding: 2px 14px;
+    margin: 0px 3px 6px 3px;
+    display: inline-block;
+}
+
+.amenities:hover {
+    color: white;
+    cursor: pointer;
+    background-color: black;
+}
+
+.amenitiesbutton {
+    float: left;
+    background: transparent;
+    border-radius: 3px;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.amenities_close {
+    background: transparent;
+    padding: 0px 7px 0px 3px;
+    margin-top: 0px;
+    color: white;
+}
+
+.amenitiesbutton {
+    cursor: pointer;
+    outline: none;
+}
+
+.amenitiesbutton1 {
+    background: transparent;
+    padding: 0px 7px 0px 3px;
+    margin-top: 0px;
+}
+
+.amenitie {
+    display: inline-block;
+    border: 2px solid lightgrey;
+    border-radius: 5px;
+    padding: 2px 0px 2px 5px;
+    margin: 0px 3px 6px 3px;
+}
+
+.amenitiesbutton1:hover {
+    color: red;
+}
+
+.dropzone {
+    border: 1px dashed rgba(0, 0, 0, .8);
+}
+
+.hide-gallery {
+    position: relative;
+    top: -188px;
+}
+
+.grid-auto {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}
+
+.grid-count {
+    margin-top: -22px;
+}
+
+@media (max-width: 992px) {
+    .nbbar {
+        display: block;
+    }
+}
+
+/* add css for address form country field */
+.address_field {
+    border: 1px solid #cfd8dc;
+    padding: .5rem .75rem;
+    border-radius: .375rem;
+    border-top-left-radius: .375rem;
+    border-bottom-left-radius: .375rem;
+}
+
+.active {
+    background-color: rgb(162, 160, 160);
+}
+
+.bg-transparent-color {
+    background-color: transparent !important;
+}
+
+table tr:nth-child(odd) {
+    background-color: #f8f8f8;
+}
+
+table tr:hover {
+    background-color: #eee;
+}
+
+.admin-content table td .button {
+    margin-right: 0px;
+}
+
+.admin-content h1,
+.admin-content h2,
+.admin-content h3,
+.admin-content h4,
+.admin-content h5,
+.admin-content h6,
+.modal-dialog h6 {
+    letter-spacing: 0;
+}
+
+.admin-content p {
+    font-weight: normal;
+}
+
+.admin-page .agent_menu {
+    width: 100px;
+    height: 100%;
+    position: fixed;
+    right: 0px;
+    background-color: #152636;
+}
+
+.admin-page .agent_menu a {
+    padding: 20px 0px;
+    font-size: 12px;
+    display: block;
+    color: #f0f0f0;
+}
+
+.admin-page .agent_menu i, .admin-page .agent_menu svg {
+    font-size: 18px;
+    display: block;
+    margin: 0px auto 5px;
+    padding: 0px;
+}
+
+.admin-page .agent_menu a:hover {
+    color: var(--primary-color);
+}
+
+.admin-page::-webkit-scrollbar {
+    width: 5px;
+}
+
+.admin-page::-webkit-scrollbar-thumb {
+    background: #233c54;
+    border-radius: 10px;
+}
+
+.admin-page::-webkit-scrollbar-track {
+    background: #152636;
+}
+
+.admin-page::-webkit-scrollbar-thumb:hover {
+    background: #284764;
+}
+
+.admin-page .button {
+    padding: 0.375rem 1rem;
+    font-size: .75rem;
+    border-radius: 4px !important;
+}
+
+.note-btn {
+    color: #333 !important;
+    background-color: #fff !important;
+    border: 1px solid #dae0e5 !important;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.wep-modal-backdrop, .wep-slide-over-backdrop {
+    -webkit-backdrop-filter: unset !important;
+    backdrop-filter: unset !important;
+    background: rgba(0, 0, 0, .6) !important
+}
+
+@media screen and (min-width: 668px) {
+    .modal-md {
+        max-width: 668px
+    }
+}
+
+.wep-modal-content {
+    overflow: unset !important
+}
+
+@media (max-width: 767px) {
+    .wep-modal-content {
+        margin: 0 !important;
+        border-radius: 8px 8px 0 0 !important
+    }
+
+    .wep-modal-content.wep-modal-content-6xl {
+        max-width: 100%
+    }
+}
+
+.wep-modal-content .wep-modal-header {
+    display: flex;
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #eee;
+    padding: 1rem 1.5rem 0.8rem 1.5rem;
+    justify-content: space-between;
+    padding-bottom: 12px;
+    align-items: center;
+}
+
+.wep-modal-content .wep-modal-header .btn-close {
+    outline: none;
+    box-shadow: none;
+    opacity: .5
+}
+
+.wep-modal-content .wep-modal-header .btn-close:hover {
+    opacity: 1
+}
+
+.wep-modal-content .wep-modal-footer .btn {
+    padding: .5rem 2rem
+}
+
+.wep-modal-content .wep-modal-footer .btn.btn-outline-light {
+    color: #303744;
+    border: 2px solid #e7e5ef
+}
+
+.wep-modal-content .wep-modal-footer .btn.btn-danger {
+    border-color: #c00000;
+    background-color: #c00000;
+    color: #fff
+}
+
+@media screen and (max-width: 500px) {
+    .wep-modal-content .wep-modal-footer .btn {
+        flex: 0 0 calc(50% - 8px);
+        max-width: calc(50% - 8px)
+    }
+}
+
+.wep-modal-content .choices__list--dropdown .choices__list, .wep-modal-content .choices__list[aria-expanded] .choices__list {
+    max-height: 260px
+}
+
+.btn.btn-main {
+    color: var(--contrast-color);
+    background: var(--accent-color);
+    border: 0;
+    padding: 10px 30px;
+    transition: 0.4s;
+    border-radius: 50px;
+}
+
+.modal-content-wrapper {
+    background-color: #fff;
+    margin: 0 auto;
+    border-radius: 8px;
+}
+
+.wep-modal-content {
+    /* Common styles for the modal content */
+    border-radius: 10px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); /* Add a subtle shadow */
+
+    .modal-header {
+        display: flex;
+        align-items: center;
+        background-color: #f8f8f8;
+        border-bottom: 1px solid #eee;
+        padding: 1rem 1.5rem 0.8rem 1.5rem;
+    }
+
+    .modal-title {
+        color: #444;
+        font-size: 1.2rem;
+        line-height: 1.2rem;
+        margin-bottom: 0;
+        text-transform: uppercase;
+    }
+
+    .modal-body {
+        position: relative;
+        flex: 1 1 auto;
+        padding: 1.5rem;
+    }
+
+    .modal-footer {
+        padding: 1rem 1.5rem 1rem 1.5rem;
+        border-top: 1px solid #eee;
+        display: flex;
+        align-items: center;
+        justify-content: start;
+    }
+
+    .btn-close::before {
+        content: "\2715"; /* Unicode character for X */
+        display: inline-block;
+        font-size: 1.5rem; /* Adjust size as needed */
+    }
+
+    .btn-close {
+        margin-left: auto;
+        font-size: 1.6rem;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    .btn {
+        padding: .625rem 1.5rem;
+        font-weight: 500;
+        font-size: .75rem;
+        display: inline-block;
+        line-height: 1.667;
+        text-align: center;
+        vertical-align: middle;
+        transition: all .15s ease-in;
+        cursor: pointer;
+        letter-spacing: 0;
+        background-size: 150%;
+        background-position-x: 25%;
+        position: relative;
+        overflow: hidden;
+        box-shadow: none;
+        color: #fff;
+        border-radius: 4px;
+        text-transform: capitalize;
+        margin-right: 1em;
+    }
+
+    .btn-secondary {
+        background-image: linear-gradient(195deg, #42424a, #191919);
+
+        &:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+    }
+
+    .btn-primary {
+        background-image: linear-gradient(195deg, #ec407a, #d81b60);
+
+        &:hover {
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+    }
+}
+
+.button-close {
+    font-size: 20px;
+    background-color: transparent !important;
+    color: #000 !important;
+    border: none !important;
+}
+
+.video-icons {
+    border: 4px solid rgb(238, 238, 238);
+    padding: 5px;
+}
+
+.video-icons.selected {
+    border: 4px solid rgb(0, 100, 131);
+}
+
+.video {
+    position: relative;
+}
+
+.video a {
+    position: absolute;
+    display: block;
+    background: url(../images/play-video.png);
+    height: 40px;
+    width: 40px;
+    top: 50%;
+    left: 50%;
+    margin: -20px 0 0 -20px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.unread {
+    font-weight: bold; /* Or any other styling you prefer */
+}
+
+
+
+.welcome-banner {
+    background: linear-gradient(20deg, rgba(30, 58, 138, 0.9), rgba(136, 1, 141, 0.9));
+    color: white;
+    border-radius: 30px;
+    padding: 50px 30px;
+    text-align: center;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    animation: fadeUp 2s ease-out both;
+    position: relative;
+}
+
+.welcome-banner .banner-icon {
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+    width: 200px;
+    height: auto; 
+    display: block; 
+    margin: 0 auto;
+    margin-top: -40px;
+
+}
+
+.welcome-banner h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #cca7ee;
+}
+
+.welcome-banner .brand-name {
+    color: #a5f3fc;
+}
+
+.welcome-banner p {
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto;
+    opacity: 0.9;
+}
+
+@media screen and (max-width: 576px) {
+    .welcome-banner h1 {
+    font-size: 16px;
+}
+    .welcome-banner p {
+        font-size: 12px; /* Smaller font size for mobile screens */
+    }
+
+    
+.welcome-banner .banner-icon {
+    width: 100px;
+    height: auto; 
+    
+
+}
+}
+
+/* Fade Up Animation */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,41 @@
+<style type="text/css">
+    @media screen and (max-width: 576px) {
+        .fotorama__caption {
+            display: none;
+        }
+    }
+
+    .fotorama__caption {
+        top: 100px;
+        left: 30px;
+        right: 0;
+        font-family: 'Helvetica Neue', Arial, sans-se;
+        font-size: 17px;
+        line-height: 1.5;
+        color: #000;
+        opacity: 0.7;
+        width: 50%;
+    }
+
+    .fotorama__caption__wrap {
+        background-color: rgb(0 0 0 / 50%);
+        color: #FFF;
+        padding: 30px;
+    }
+</style>
+<section class="">
+    <div class="row m-0 p-0" wire:ignore>
+        @foreach($property_gallery_details as $key => $property_detail)
+            <h2 class="px-0 mb-5 text-center property-page-title site-color"
+                style="margin-top: 40px">{{ $property_detail['gallery_name'] }}</h2>
+            <!-- Place somewhere in the <body> of your page -->
+            <div class="fotorama" data-nav="thumbs" data-allowfullscreen="native" data-fit="cover" data-width="100%">
+                @foreach( $property_detail['images'] as $property_images_detail)
+                    <a href="{{asset_s3($property_images_detail['file_name'])}}"
+                       data-caption="{{ $property_detail['short_description'] }}"><img
+                                src="{{asset_s3($property_images_detail['thumb_name'])}}"></a>
+                @endforeach
+            </div>
+        @endforeach
+    </div>
+</section>

@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+body {
+  font-family: 'Lato', sans-serif !important;
+  font-size: 14px;
+}
+:root {
+  --primary-color: #28ADC4;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+button,
+.button-green{
+  background-color: var(--primary-color) !important;
+  border: 1px solid var(--primary-color) !important;
+  box-shadow: none !important;
+  color: #fff !important;
+  border-radius: 4px;
+  text-transform: capitalize;
+  float: none;
+}
+.button:hover {
+  box-shadow: none !important;
+  background-color: #1d8c9f !important;
+}
+.main-content {
+  width: calc(100% - 100px);
+  padding: 15px;
+}
+table th {
+  padding: 10px;
+  border: 1px solid #00706e !important;
+}
+table td {
+  border: 1px solid #ddd;
+  padding: 5px 10px;
+}
+.table-responsive{
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+.dialog .dialog-header .button-close{
+  background-color: transparent !important;
+  border: none !important;
+}
+.d-flex{
+  display: flex;
+}
+.credit-plans .button {
+  position: relative;
+  top: -45px;
+  overflow: hidden;
+  float: right;
+}
+.admin-content .dialog-footer .button.mr-3{
+  margin-right: 10px;
+}
+.admin-content .dialog-footer .button{
+  position: static;
+}
