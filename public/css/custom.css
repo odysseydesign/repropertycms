@@ -1,7 +1,7 @@
 /*
-green shade - #008a8f
-Blue Shade - #0069a6
-purple shade - #6f4693
+green shade - var(--accent-color)
+Blue Shade - var(--secondary-color)
+purple shade - var(--accent-2-color)
 button blue - #1F7FBC
 */
 
@@ -31,8 +31,8 @@ button blue - #1F7FBC
 
 .input-group.focused.input-group-outline .form-label + .form-control,
 .input-group.is-filled.input-group-outline .form-label + .form-control {
-    /* border-color:#0000 #6f4693 #6f4693;
-    box-shadow:inset 1px 0 #6f4693,inset -1px 0 #6f4693,inset 0 -1px #6f4693; */
+    /* border-color:#0000 var(--accent-2-color) var(--accent-2-color);
+    box-shadow:inset 1px 0 var(--accent-2-color),inset -1px 0 var(--accent-2-color),inset 0 -1px var(--accent-2-color); */
     border-color: #0000 #cfd8dc #cfd8dc;
     box-shadow: inset 1px 0 #cfd8dc, inset -1px 0 #cfd8dc, inset 0 -1px #cfd8dc;
 }
@@ -48,15 +48,15 @@ h3,
 h4,
 h5,
 h6 {
-    color: #0069a6;
+    color: var(--secondary-color);
 }
 
 .input-group.focused .form-label:after,
 .input-group.focused .form-label:before,
 .input-group.is-filled .form-label:after,
 .input-group.is-filled .form-label:before {
-    /* border-top-color: #6f4693;
-    box-shadow: inset 0 1px #6f4693; */
+    /* border-top-color: var(--accent-2-color);
+    box-shadow: inset 0 1px var(--accent-2-color); */
     border-top-color: #cfd8dc;
     box-shadow: inset 0 1px #cfd8dc;
 }
@@ -74,19 +74,19 @@ strong {
 /* Overriding the styles from material-tailwind - END */
 
 .ri-bg-blue {
-    background-color: #0069a6;
+    background-color: var(--secondary-color);
 }
 
 .ri-bg-green {
-    background-color: #008a8f;
+    background-color: var(--accent-color);
 }
 
 .ri-bg-purple {
-    background-color: #6f4693;
+    background-color: var(--accent-2-color);
 }
 
 .text-color-p {
-    color: #6f4693;
+    color: var(--accent-2-color);
 }
 
 h4 {
@@ -137,7 +137,7 @@ table tr:hover {
 
 table th {
     text-align: left;
-    background-color: #009390;
+    background-color: var(--accent-color);
     color: white;
 }
 
@@ -177,7 +177,7 @@ textarea,
 .btn-purple {
     float: right;
     margin-top: -6vh;
-    background-color: #6f4693;
+    background-color: var(--accent-2-color);
     font-weight: bold;
     font-size: 15px;
     color: white;
@@ -415,7 +415,7 @@ table tr:hover {
     height: 100%;
     position: fixed;
     right: 0px;
-    background-color: #152636;
+    background-color: var(--sidebar-color);
 }
 
 .admin-page .agent_menu a {
@@ -446,7 +446,7 @@ table tr:hover {
 }
 
 .admin-page::-webkit-scrollbar-track {
-    background: #152636;
+    background: var(--sidebar-color);
 }
 
 .admin-page::-webkit-scrollbar-thumb:hover {
@@ -671,7 +671,7 @@ table tr:hover {
 .video a {
     position: absolute;
     display: block;
-    background: url(../images/play-video.png);
+    background: url(../images/icon-play-video.png);
     height: 40px;
     width: 40px;
     top: 50%;

@@ -1,10 +1,10 @@
 @include('includes.agents.head')
 @include('flash-message')
-<div class="h-100 w-100 login-page" style='background-image: url("{{ asset('images/signup-background.jpg') }}"); padding:130px 0px;background-size:cover;'>
+<div class="h-100 w-100 login-page" style='background-image: url("{{ asset('images/auth-background.jpg') }}"); padding:130px 0px;background-size:cover;'>
     <div class="rounded-lg p-8">
         <div class="agentsign rounded-lg">
             <div class="agnet_logo">
-                <img src="{{asset('images/realtyinterface_logo.png')}}" alt="Logo Not Found !">
+                <img src="{{asset('images/logo-placeholder.png')}}" alt="Logo Not Found !">
             </div>
             <form action="{{url('agent/sign-in')}}" class="text-white" method="post">
                 @csrf

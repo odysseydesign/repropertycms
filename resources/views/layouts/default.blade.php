@@ -86,6 +86,9 @@
     </script>
     <!-- Here handle the gallery lightbox section js end -->
 
+    <!-- Brand CSS variables (colors + fonts) -->
+    @include('includes.brand-styles')
+
     @stack('styles')
 </head>
 <style>

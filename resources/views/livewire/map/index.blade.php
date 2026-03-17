@@ -67,7 +67,7 @@
                 marker = new google.maps.Marker({
                     map: map,
                     position: location,
-                    icon: {url: "{{ asset('images/crib.png?v=2') }}"},
+                    icon: {url: "{{ asset('images/icon-map-marker.png?v=2') }}"},
                     draggable: true,
                 });
 
@@ -181,7 +181,7 @@
                     marker = new google.maps.Marker({
                         map: map,
                         position: location,
-                        icon: {url: "{{ asset('/images/crib.png?v=2') }}"},
+                        icon: {url: "{{ asset('/images/icon-map-marker.png?v=2') }}"},
                         draggable: true,
                         animation: google.maps.Animation.DROP,
                     });

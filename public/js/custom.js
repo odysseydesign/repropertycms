@@ -656,7 +656,7 @@ function dragEnd(event) {
 
     html = "";
 //    html += "<span class='p-5 rounded-full bg-grey z-50 absolute' style='margin-top:"+y+"px; margin-left:"+x+"px;' id='hotspot"+event.target.id+"'>";
-    html += '<img src="' + web_url + '/images/camera_icon.png" class="absolute" style="margin-top:' + (y - 25) + 'px; margin-left:' + (x - 25) + 'px;" id="hotspot' + event.target.id + '"/>';
+    html += '<img src="' + web_url + '/images/icon-camera.png" class="absolute" style="margin-top:' + (y - 25) + 'px; margin-left:' + (x - 25) + 'px;" id="hotspot' + event.target.id + '"/>';
     html += "</span>";
     $('.drop-append').append(html);
     $.ajax({

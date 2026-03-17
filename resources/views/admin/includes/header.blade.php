@@ -1,0 +1,56 @@
+@php
+    $brand = cache()->remember('brand_settings', 3600, fn() =>
+        \Illuminate\Support\Facades\DB::table('brand_settings')->first()
+    );
+    $brandLogo = ($brand && $brand->logo_path) ? asset($brand->logo_path) : asset('images/logo-placeholder-small.png');
+@endphp
+<aside class="md:block md:w-auto" aria-label="Sidebar">
+  <ul>
+    <li>
+      <a href="{{url('agent/dashboard')}}" class="py-2">
+          <img src="{{ $brandLogo }}" alt="{{ config('app.name') }}">
+      </a>
+    </li>
+      <li>
+          <a href="{{url('admin/dashboard')}}"><i class="fas fa-th-large pr-2"></i>
+              <span>Dashboard</span>
+          </a>
+      </li>
+      <li>
+          <a href="{{url('admin/agent-listing')}}"><i class="fas fa-user pr-2"></i>
+              <span>Agents</span>
+          </a>
+      </li>
+      <li>
+          <a href="{{url('admin/all-properties')}}"><i class="fas fa-home pr-2"></i>
+              <span>All Properties</span>
+          </a>
+      </li>
+      <li>
+          <a href="{{url('admin/plans/index')}}"><i class="fa-solid fa-square-check pr-2"></i>
+              <span>Plans</span>
+          </a>
+      </li>
+      <li>
+          <a href="{{route('admin.subscriber.index')}}"><i class="fa-solid fa-dollar-sign pr-2"></i>
+              <span>Subscriber</span>
+          </a>
+      </li>
+      <li>
+          <a href="{{route('admin.pages.lists')}}"><i class="fas fa-home pr-2"></i>
+              <span>Pages</span>
+          </a>
+      </li>
+      <li>
+          <a href="{{route('admin.settings.index')}}"><i class="fas fa-cog pr-2"></i>
+              <span>Settings</span>
+          </a>
+      </li>
+      <li>
+          <a href="{{url('admin/sign-out')}}">
+        <i class="fas fa-door-open pr-2"></i>
+        <span>Sign Out</span>
+      </a>
+    </li>
+  </ul>
+</aside>

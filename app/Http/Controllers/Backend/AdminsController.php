@@ -8,6 +8,6 @@ class AdminsController extends Controller
 {
     public function admin()
     {
-        return redirect('/backend/sign-in');
+        return redirect('/admin/sign-in');
     }
 }

@@ -201,14 +201,14 @@
                                                             <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
                                                                 <tr>
                                                                     <td valign="top" style="padding: 0px 0px 10px 0px;">
-                                                                        <img src="{{ asset('images/image-1739033940526.png') }}" width="520" height="auto" alt="" style="display: block; outline: 0; line-height: 100%; -ms-interpolation-mode: bicubic; width: 100%; height: auto; border: 0;" />
+                                                                        <img src="{{ asset('images/email-header-welcome.png') }}" width="520" height="auto" alt="" style="display: block; outline: 0; line-height: 100%; -ms-interpolation-mode: bicubic; width: 100%; height: auto; border: 0;" />
                                                                     </td>
                                                                 </tr>
                                                             </table>
                                                             <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
                                                                 <tr>
                                                                     <td align="center" valign="top">
-                                                                        <img src="{{ asset('images/image-1738193162310.jpg') }}" width="442" height="auto" alt="" style="display: block; outline: 0; line-height: 100%; -ms-interpolation-mode: bicubic; width: 85%; height: auto; border: 0;" />
+                                                                        <img src="{{ asset('images/email-promo-tagline.jpg') }}" width="442" height="auto" alt="" style="display: block; outline: 0; line-height: 100%; -ms-interpolation-mode: bicubic; width: 85%; height: auto; border: 0;" />
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -322,7 +322,7 @@
                                                                 <tr>
                                                                     <td valign="top" style="padding: 35px 0px 0px 0px;">
                                                                         <a class="pc-font-alt" href="https://www.instagram.com/realtyinterface/" style="text-decoration: none;">
-                                                                            <img src="{{ asset('images/image-1739041984884.png') }}" width="600" height="auto" alt="" style="display: block; outline: 0; line-height: 100%; -ms-interpolation-mode: bicubic; width: 100%; height: auto; border: 0;" />
+                                                                            <img src="{{ asset('images/email-follow-us.png') }}" width="600" height="auto" alt="" style="display: block; outline: 0; line-height: 100%; -ms-interpolation-mode: bicubic; width: 100%; height: auto; border: 0;" />
                                                                         </a>
                                                                     </td>
                                                                 </tr>
@@ -361,7 +361,7 @@
                                                                                                                 <tr>
                                                                                                                     <td valign="top">
                                                                                                                         <a class="pc-font-alt" href="https://www.instagram.com/realtyinterface/" style="text-decoration: none;">
-                                                                                                                            <img src="{{ asset('images/0ec0654339cc5290f22ece6609160f81.png') }}" class="" width="20" height="20" style="display: block; border: 0; outline: 0; line-height: 100%; -ms-interpolation-mode: bicubic; width: 20px; height: 20px;" alt="" />
+                                                                                                                            <img src="{{ asset('images/icon-instagram.png') }}" class="" width="20" height="20" style="display: block; border: 0; outline: 0; line-height: 100%; -ms-interpolation-mode: bicubic; width: 20px; height: 20px;" alt="" />
                                                                                                                         </a>
                                                                                                                     </td>
                                                                                                                 </tr>
@@ -413,7 +413,7 @@
                                                                                                                 <tr>
                                                                                                                     <td align="center" valign="top" style="padding: 0px 50px 20px 50px;">
                                                                                                                         <a class="pc-font-alt" href="https://www.realtyinterface.com/" target="_blank" style="text-decoration: none;">
-                                                                                                                            <img src="{{ asset('images/image-1738189974054.png') }}" width="130" height="auto" alt="Realty Interface Luxury Websites" style="display: block; outline: 0; line-height: 100%; -ms-interpolation-mode: bicubic; width: 52%; height: auto; border: 0;" />
+                                                                                                                            <img src="{{ asset('images/logo-placeholder.png') }}" width="130" height="auto" alt="Realty Interface Luxury Websites" style="display: block; outline: 0; line-height: 100%; -ms-interpolation-mode: bicubic; width: 52%; height: auto; border: 0;" />
                                                                                                                         </a>
                                                                                                                     </td>
                                                                                                                 </tr>

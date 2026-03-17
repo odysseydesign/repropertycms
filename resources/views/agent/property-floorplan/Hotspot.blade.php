@@ -36,7 +36,7 @@
                     @if($property_floorplan_images->count() > 0)
                         @foreach($property_floorplan_images as $property_floorplan_image)
                             @php $coordinates = explode(",",$property_floorplan_image->coordinates); @endphp
-                            <img src="{{asset('images/camera_icon.png')}}" class="absolute showHotspots" style=" margin-top:{{ $coordinates[1] - 25 }}px; margin-left:{{ $coordinates[0] -25 }}px;" id='hotspot{{ $property_floorplan_image->property_image_id }}'/>
+                            <img src="{{asset('images/icon-camera.png')}}" class="absolute showHotspots" style=" margin-top:{{ $coordinates[1] - 25 }}px; margin-left:{{ $coordinates[0] -25 }}px;" id='hotspot{{ $property_floorplan_image->property_image_id }}'/>
                             </span>
                         @endforeach
                     @endif

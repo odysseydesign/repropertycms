@@ -8,13 +8,13 @@
             <div class="w-1/2">
                 <div wire:click="$set('showUploadOption', 'Youtube')"
                      class="flex items-center justify-center h-48 bg-gray-200 rounded-lg m-2 video-icons {{ ($showUploadOption === 'Youtube') ? 'selected' : '' }}">
-                    <img src="{{ asset('images/youtube-2.png') }}" class="max-h-full max-w-full"/>
+                    <img src="{{ asset('images/icon-youtube.png') }}" class="max-h-full max-w-full"/>
                 </div>
             </div>
             <div class="w-1/2">
                 <div wire:click="$set('showUploadOption', 'Vimeo')"
                      class="flex items-center justify-center h-48 bg-gray-200 rounded-lg m-2 video-icons {{ ($showUploadOption === 'Vimeo') ? 'selected' : '' }}">
-                    <img src="{{ asset('images/vimeo-2.png') }}" class="max-h-full max-w-full"/>
+                    <img src="{{ asset('images/icon-vimeo.png') }}" class="max-h-full max-w-full"/>
                 </div>
             </div>
 {{--            <div class="w-1/3">--}}

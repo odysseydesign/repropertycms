@@ -31,7 +31,7 @@
 
     <!-- STYLE CSS -->
     <link href="{{asset('css/custom.css')}}" rel="stylesheet"/>
-    <link href="{{asset('css/realtyniterface.css')}}" rel="stylesheet"/>
+    <link href="{{asset('css/brand.css')}}" rel="stylesheet"/>
     <link href="{{asset('css/view-propery.css')}}" rel="stylesheet"/>
     <link href="{{asset('css/responsive.css')}}" rel="stylesheet"/>
 
@@ -40,6 +40,9 @@
 
     <!-- cropper css -->
     <link href="{{asset('css/cropper.css')}}" rel="stylesheet"/>
+
+    <!-- Brand CSS variables (colors + fonts) -->
+    @include('includes.brand-styles')
 
     <script>
         /* Public URL of the website use in JS - web_url */

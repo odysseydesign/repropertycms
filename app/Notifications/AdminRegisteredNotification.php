@@ -42,7 +42,7 @@ class AdminRegisteredNotification extends Notification
             ->line('A new agent registered on RealtyInterface.com.')
             ->line('Agent Name: '.$this->agent->first_name.' '.$this->agent->last_name)
             ->line('Agent Email: '.$this->agent->email)
-            ->action('View Agent', route('backend.agentListing'))
+            ->action('View Agent', route('admin.agentListing'))
             ->line('Thank you for using our application!');
     }
 

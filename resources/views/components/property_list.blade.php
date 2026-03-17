@@ -25,7 +25,7 @@ $color = '#0069a6';
                                 @if($row->property_images->first())
                                     <img src="{{ asset_s3($row->property_images->first()->thumb) }}" class="card-img-top" alt="Property Image" style="width: 100%; height: 100%; object-fit: cover;">
                                 @else
-                                    <img src="{{ asset('images/bedrealtyinterface5.jpg') }}" class="card-img-top" alt="Property Image" style="width: 100%; height: 100%; object-fit: cover;">
+                                    <img src="{{ asset('images/placeholder-chalet-exterior.jpg') }}" class="card-img-top" alt="Property Image" style="width: 100%; height: 100%; object-fit: cover;">
                                 @endif
                             </div>
                             <h5 class="card-title text-center mt-3" style="color: #0b0b0b;">{{ $row->address_line_1 }}</h5>

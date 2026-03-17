@@ -13,7 +13,7 @@ class PropertiesController extends Controller
     {
         $agents = Agents::all();
 
-        return view('backend.properties', compact('agents'));
+        return view('admin.properties', compact('agents'));
     }
 
     public function ExpiryDue(Request $request, $id)
@@ -23,7 +23,7 @@ class PropertiesController extends Controller
         $properties->expiry_date = $request['new_expiry_date'];
 
         if ($properties->save()) {
-            return redirect('/backend/properties')->with('success', 'Extend Property Publish Date successfully.');
+            return redirect('/admin/properties')->with('success', 'Extend Property Publish Date successfully.');
         } else {
             return redirect()->back()->with('error', 'Error Saving Data ! ');
         }

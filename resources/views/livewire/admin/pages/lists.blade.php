@@ -1,7 +1,7 @@
 <div class="w-full py-5">
     <div class="d-flex align-items-center justify-content-between my-4 flex-wrap page-heading">
         <h5 class="mb-0">Pages</h5>
-        <a href="{{ route('backend.pages.create') }}"
+        <a href="{{ route('admin.pages.create') }}"
                 class="btn-blue m-0">
             <i class="fa fa-plus mr-1"></i> Create Page
         </a>

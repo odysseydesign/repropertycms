@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 @section('content')
-<div class="w-100 h-100" style='background-image: url("{{ asset('images/signup-background.jpg') }}"); padding:100px 0px;background-size:cover;'>
+<div class="w-100 h-100" style='background-image: url("{{ asset('images/auth-background.jpg') }}"); padding:100px 0px;background-size:cover;'>
         <div class="container py-1" >
                 <div class="card shadow-lg p-4 rounded-lg agentsign" style="background-color:#39393c; color: white; font-family: 'Tenor Sans;">
                         <h1 class="text-center mb-4">Terms and Conditions</h1>

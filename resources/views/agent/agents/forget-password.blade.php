@@ -1,9 +1,9 @@
 @include('includes.agents.head')
 @include('flash-message')
-<div class="h-100 w-100 login-page" style='background-image: url("{{ asset('images/signup-background.jpg') }}");background-size:cover;'>
+<div class="h-100 w-100 login-page" style='background-image: url("{{ asset('images/auth-background.jpg') }}");background-size:cover;'>
     <div class="rounded-lg p-8 agentsign" >
         <div class="agnet_logo">
-            <img src="{{asset('images/logo_small.png')}}" alt="Logo Not Found !">
+            <img src="{{asset('images/logo-placeholder-small.png')}}" alt="Logo Not Found !">
         </div>
         <div class="text-white" id="forgot-password">
             <div class="input-group-outline input-group my-3">

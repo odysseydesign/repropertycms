@@ -4,9 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <!--[if !mso]><!-- -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!--<![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="format-detection" content="date=no" />
@@ -15,8 +13,6 @@
     <meta name="x-apple-disable-message-reformatting" />
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:ital,wght@0,400;0,400;0,500;0,600" rel="stylesheet" />
     <title>Welcome</title>
-    <!-- Made with Postcards Email Builder by Designmodo -->
-    <!--[if !mso]><!-- -->
     <style>
         /* cyrillic-ext */
         @font-face { font-family: 'Fira Sans'; font-style: normal; font-weight: 400; src: local('Fira Sans Regular'), local('FiraSans-Regular'), url(https://fonts.gstatic.com/s/firasans/v10/va9E4kDNxMZdWfMOD5VvmojLazX3dGTP.woff2) format('woff2'); unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F; }
@@ -35,7 +31,6 @@
         /* latin */
         @font-face { font-family: 'Fira Sans'; font-style: normal; font-weight: 500; src: local('Fira Sans Medium'), local('FiraSans-Medium'), url(https://fonts.gstatic.com/s/firasans/v10/va9B4kDNxMZdWfMOD5VnZKveRhf6Xl7Glw.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
     </style>
-    <!--<![endif]-->
     <style>
         html,
         body {
@@ -154,26 +149,9 @@
             .pc-w520-padding-5-0-15-0 {padding: 5px 0px 15px 0px !important;}
         }
     </style>
-    <!--[if !mso]><!-- -->
     <style>
         @font-face { font-family: 'Fira Sans'; font-style: normal; font-weight: 400; src: url('https://fonts.gstatic.com/s/firasans/v17/va9E4kDNxMZdWfMOD5VvmYjN.woff') format('woff'), url('https://fonts.gstatic.com/s/firasans/v17/va9E4kDNxMZdWfMOD5VvmYjL.woff2') format('woff2'); } @font-face { font-family: 'Fira Sans'; font-style: normal; font-weight: 500; src: url('https://fonts.gstatic.com/s/firasans/v17/va9B4kDNxMZdWfMOD5VnZKveSBf8.woff') format('woff'), url('https://fonts.gstatic.com/s/firasans/v17/va9B4kDNxMZdWfMOD5VnZKveSBf6.woff2') format('woff2'); } @font-face { font-family: 'Fira Sans'; font-style: normal; font-weight: 600; src: url('https://fonts.gstatic.com/s/firasans/v17/va9B4kDNxMZdWfMOD5VnSKzeSBf8.woff') format('woff'), url('https://fonts.gstatic.com/s/firasans/v17/va9B4kDNxMZdWfMOD5VnSKzeSBf6.woff2') format('woff2'); }
     </style>
-    <!--<![endif]-->
-    <!--[if mso]>
-    <style type="text/css">
-        .pc-font-alt {
-            font-family: Arial, Helvetica, sans-serif !important;
-        }
-    </style>
-    <![endif]-->
-    <!--[if gte mso 9]>
-    <xml>
-        <o:OfficeDocumentSettings>
-            <o:AllowPNG/>
-            <o:PixelsPerInch>96</o:PixelsPerInch>
-        </o:OfficeDocumentSettings>
-    </xml>
-    <![endif]-->
 </head>
 
 <body class="body pc-font-alt" style="width: 100% !important; min-height: 100% !important; margin: 0 !important; padding: 0 !important; line-height: 1.5; color: #2D3A41; mso-line-height-rule: exactly; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-variant-ligatures: normal; text-rendering: optimizeLegibility; -moz-osx-font-smoothing: grayscale; background-color: #f4f4f4;" bgcolor="#f4f4f4">
@@ -186,7 +164,6 @@
                         <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%" style="width: 100%;">
                             <tr>
                                 <td valign="top">
-                                    <!-- BEGIN MODULE: Header 2 -->
                                     <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation">
                                         <tr>
                                             <td style="padding: 0px 0px 0px 0px;">
@@ -196,14 +173,14 @@
                                                             <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
                                                                 <tr>
                                                                     <td valign="top" style="padding: 0px 0px 10px 0px;">
-                                                                        <img src="{{ asset('images/image-1739033940526.png') }}" width="520" height="auto" alt="" style="display: block; outline: 0; line-height: 100%; -ms-interpolation-mode: bicubic; width: 100%; height: auto; border: 0;" />
+                                                                        <img src="{{ asset('images/email-header-welcome.png') }}" width="520" height="auto" alt="" style="display: block; outline: 0; line-height: 100%; -ms-interpolation-mode: bicubic; width: 100%; height: auto; border: 0;" />
                                                                     </td>
                                                                 </tr>
                                                             </table>
                                                             <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
                                                                 <tr>
                                                                     <td align="center" valign="top">
-                                                                        <img src="{{ asset('images/image-1738193162310.jpg') }}" width="442" height="auto" alt="" style="display: block; outline: 0; line-height: 100%; -ms-interpolation-mode: bicubic; width: 85%; height: auto; border: 0;" />
+                                                                        <img src="{{ asset('images/email-promo-tagline.jpg') }}" width="442" height="auto" alt="" style="display: block; outline: 0; line-height: 100%; -ms-interpolation-mode: bicubic; width: 85%; height: auto; border: 0;" />
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -212,12 +189,7 @@
                                                                     <td valign="top" style="padding: 15px 0px 0px 0px;">
                                                                         <table width="95%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="margin: auto;">
                                                                             <tr>
-                                                                                <!--[if gte mso 9]>
-                                                                               <td height="1" valign="top" style="line-height: 1px; font-size: 1px; border-bottom: 1px solid #9a9a98;">&nbsp;</td>
-                                                                           <![endif]-->
-                                                                                <!--[if !gte mso 9]><!-- -->
                                                                                 <td height="1" valign="top" style="line-height: 1px; font-size: 1px; border-bottom: 1px solid #9a9a98;">&nbsp;</td>
-                                                                                <!--<![endif]-->
                                                                             </tr>
                                                                         </table>
                                                                     </td>
@@ -226,7 +198,7 @@
                                                             <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
                                                                 <tr>
                                                                     <td valign="top">
-                                                                        <img src="{{ asset('images/image-1739039938571.png') }}" width="520" height="auto" alt="" style="display: block; outline: 0; line-height: 100%; -ms-interpolation-mode: bicubic; width: 100%; height: auto; border: 0;" />
+                                                                        <img src="{{ asset('images/email-greeting.png') }}" width="520" height="auto" alt="" style="display: block; outline: 0; line-height: 100%; -ms-interpolation-mode: bicubic; width: 100%; height: auto; border: 0;" />
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -256,7 +228,7 @@
                                                                                 <td valign="top" align="left">
                                                                                     <div class="pc-font-alt" style="text-decoration: none;">
                                                                                         <div style="font-size: 15px;line-height: 21px;text-align:center;text-align-last:center;color:#46e8ed;font-style:normal;font-weight:400;letter-spacing:-0.2px;font-variant-ligatures:normal;">
-                                                                                            <div><span style="font-family: 'Fira Sans', Arial, Helvetica, sans-serif; font-size: 15px; line-height: 21px; text-decoration: none; text-transform: none;">We are so excited to have you at Realty Interface! It is our hope that you find our property websites a perfect choice for your luxury estate homes.</span>
+                                                                                            <div><span style="font-family: 'Fira Sans', Arial, Helvetica, sans-serif; font-size: 15px; line-height: 21px; text-decoration: none; text-transform: none;">We are so excited to have you at {{ config('app.name') }}! It is our hope that you find our property websites a perfect choice for your luxury estate homes.</span>
                                                                                                 <br>
                                                                                                 <br><span style="font-family: 'Fira Sans', Arial, Helvetica, sans-serif; font-size: 15px; line-height: 21px; text-decoration: none; text-transform: none;">The best storytelling captures the imagination of the buyer and connects the buyer to the land, views and overall feeling of life in the property, all before the buyer sets foot into the home.</span>
                                                                                                 <br>
@@ -276,12 +248,10 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    <!-- END MODULE: Header 2 -->
                                 </td>
                             </tr>
                             <tr>
                                 <td valign="top">
-                                    <!-- BEGIN MODULE: Content 10 -->
                                     <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation">
                                         <tr>
                                             <td style="padding: 0px 0px 0px 0px;">
@@ -303,7 +273,7 @@
                                                                                                             <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
                                                                                                                 <tr>
                                                                                                                     <td align="left" valign="top" style="padding: 0px 0px 14px 0px;">
-                                                                                                                        <img src="{{ asset('images/image-1738193114245.jpg') }}" width="500" height="601" alt="" style="display: block; outline: 0; line-height: 100%; -ms-interpolation-mode: bicubic; width: 500px; height: auto; max-width: 100%; border-radius: 8px; border: 0;" />
+                                                                                                                        <img src="{{ asset('images/email-promo-app-login.jpg') }}" width="500" height="601" alt="" style="display: block; outline: 0; line-height: 100%; -ms-interpolation-mode: bicubic; width: 500px; height: auto; max-width: 100%; border-radius: 8px; border: 0;" />
                                                                                                                     </td>
                                                                                                                 </tr>
                                                                                                             </table>
@@ -347,18 +317,7 @@
                                                                                                             <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
                                                                                                                 <tr>
                                                                                                                     <th valign="top" align="center" style="padding: 0px 0px 0px 0px; text-align: center; font-weight: normal; line-height: 1;">
-                                                                                                                        <!--[if mso]>
-                                                                                                                        <table border="0" cellpadding="0" cellspacing="0" role="presentation" align="center" style="border-collapse: separate; border-spacing: 0; margin-right: auto; margin-left: auto;">
-                                                                                                                            <tr>
-                                                                                                                                <td valign="middle" align="center" style="border-radius: 17px 17px 17px 17px; background-color: #10aab1; box-shadow: 3px -1px 10px 0px rgba(81,81,81,1); text-align:center; color: #ffffff; padding: 19px 28px 14px 30px; mso-padding-left-alt: 0; margin-left:30px;" bgcolor="#10aab1">
-                                                                                                                                    <a class="pc-font-alt" style="display: inline-block; text-decoration: none; font-variant-ligatures: normal; font-family: 'Fira Sans', Arial, Helvetica, sans-serif; text-align: center;" href="https://app.realtyinterface.com/login" target="_blank"><span style="font-size: 24px;line-height: 24px;color:#ffffff;letter-spacing:-0.2px;font-weight:400;font-style:normal;display:inline-block;font-variant-ligatures:normal;"><span style="display:inline-block;"><span style="font-family: 'Georgia', Times New Roman, Times, serif; font-size: 24px; line-height: 24px; text-decoration: none; text-transform: none;">SIGN IN</span></span></span></a>
-                                                                                                                                </td>
-                                                                                                                            </tr>
-                                                                                                                        </table>
-                                                                                                                        <![endif]-->
-                                                                                                                        <!--[if !mso]><!-- -->
                                                                                                                         <a style="display: inline-block; box-sizing: border-box; border-radius: 17px 17px 17px 17px; background-color: #10aab1; padding: 19px 28px 14px 30px; box-shadow: 3px -1px 10px 0px rgba(81,81,81,1); font-family: 'Fira Sans', Arial, Helvetica, sans-serif; vertical-align: top; text-align: center; text-align-last: center; text-decoration: none; -webkit-text-size-adjust: none;" href="https://app.realtyinterface.com/login" target="_blank"><span style="font-size: 24px;line-height: 24px;color:#ffffff;letter-spacing:-0.2px;font-weight:400;font-style:normal;display:inline-block;font-variant-ligatures:normal;"><span style="display:inline-block;"><span style="font-family: 'Georgia', Times New Roman, Times, serif; font-size: 24px; line-height: 24px; text-decoration: none; text-transform: none;">SIGN IN</span></span></span></a>
-                                                                                                                        <!--<![endif]-->
                                                                                                                     </th>
                                                                                                                 </tr>
                                                                                                             </table>
@@ -380,12 +339,10 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    <!-- END MODULE: Content 10 -->
                                 </td>
                             </tr>
                             <tr>
                                 <td valign="top">
-                                    <!-- BEGIN MODULE: Title -->
                                     <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation">
                                         <tr>
                                             <td style="padding: 0px 0px 0px 0px;">
@@ -411,12 +368,10 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    <!-- END MODULE: Title -->
                                 </td>
                             </tr>
                             <tr>
                                 <td valign="top">
-                                    <!-- BEGIN MODULE: Content 10 -->
                                     <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation">
                                         <tr>
                                             <td style="padding: 0px 0px 0px 0px;">
@@ -426,33 +381,22 @@
                                                             <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
                                                                 <tr>
                                                                     <td valign="top" style="padding: 30px 30px 30px 30px;">
-                                                                        <img src="{{ asset('images/image-1739038674082.jpg') }}" width="460" height="auto" alt="" style="display: block; outline: 0; line-height: 100%; -ms-interpolation-mode: bicubic; width: 100%; height: auto; border: 0;" />
+                                                                        <img src="{{ asset('images/email-promo-floorplan.jpg') }}" width="460" height="auto" alt="" style="display: block; outline: 0; line-height: 100%; -ms-interpolation-mode: bicubic; width: 100%; height: auto; border: 0;" />
                                                                     </td>
                                                                 </tr>
                                                             </table>
                                                             <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
                                                                 <tr>
                                                                     <th valign="top" align="center" style="text-align: center; font-weight: normal; line-height: 1;">
-                                                                        <!--[if mso]>
-                                                                        <table border="0" cellpadding="0" cellspacing="0" role="presentation" align="center" style="border-collapse: separate; border-spacing: 0; margin-right: auto; margin-left: auto;">
-                                                                            <tr>
-                                                                                <td valign="middle" align="center" style="border-radius: 8px; background-color: #10aab1; box-shadow: 3px 3px 10px 0px rgba(0,0,0,1); text-align:center; color: #ffffff; padding: 15px 30px 14px 30px; mso-padding-left-alt: 0; margin-left:30px;" bgcolor="#10aab1">
-                                                                                    <a class="pc-font-alt" style="display: inline-block; text-decoration: none; font-variant-ligatures: normal; font-family: 'Fira Sans', Arial, Helvetica, sans-serif; text-align: center;" href="https://www.realtyinterface.com/learn" target="_blank"><span style="font-size: 24px;line-height: 25px;color:#ffffff;letter-spacing:-0.2px;font-weight:400;font-style:normal;display:inline-block;font-variant-ligatures:normal;"><span style="display:inline-block;"><span style="font-family: 'Georgia', Times New Roman, Times, serif; font-size: 24px; line-height: 25px; text-decoration: none; text-transform: none;">LEARN</span></span></span></a>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </table>
-                                                                        <![endif]-->
-                                                                        <!--[if !mso]><!-- -->
                                                                         <a style="display: inline-block; box-sizing: border-box; border-radius: 8px; background-color: #10aab1; padding: 15px 30px 14px 30px; box-shadow: 3px 3px 10px 0px rgba(0,0,0,1); font-family: 'Fira Sans', Arial, Helvetica, sans-serif; vertical-align: top; text-align: center; text-align-last: center; text-decoration: none; -webkit-text-size-adjust: none;" href="https://www.realtyinterface.com/learn" target="_blank"><span style="font-size: 24px;line-height: 25px;color:#ffffff;letter-spacing:-0.2px;font-weight:400;font-style:normal;display:inline-block;font-variant-ligatures:normal;"><span style="display:inline-block;"><span style="font-family: 'Georgia', Times New Roman, Times, serif; font-size: 24px; line-height: 25px; text-decoration: none; text-transform: none;">LEARN</span></span></span></a>
-                                                                        <!--<![endif]-->
                                                                     </th>
                                                                 </tr>
                                                             </table>
                                                             <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
                                                                 <tr>
                                                                     <td align="left" valign="top" style="padding: 35px 0px 40px 0px;">
-                                                                        <a class="pc-font-alt" href="https://vimeo.com/1053000318" target="_blank" style="text-decoration: none;">
-                                                                            <img src="{{ asset('images/d9a692154ade13822a4f13f7b3c79c5b.png') }}" class="" width="520" height="auto" style="display: block; outline: 0; line-height: 100%; -ms-interpolation-mode: bicubic; min-width: 111.3402061872px; min-height: 1px; width:100%; height: auto; border: 0;" alt="" />
+                                                                        <a class="pc-font-alt" href="#" target="_blank" style="text-decoration: none;">
+                                                                            <img src="{{ asset('images/email-video-tutorial.png') }}" class="" width="520" height="auto" style="display: block; outline: 0; line-height: 100%; -ms-interpolation-mode: bicubic; min-width: 111.3402061872px; min-height: 1px; width:100%; height: auto; border: 0;" alt="" />
                                                                         </a>
                                                                     </td>
                                                                 </tr>
@@ -463,12 +407,10 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    <!-- END MODULE: Content 10 -->
                                 </td>
                             </tr>
                             <tr>
                                 <td valign="top">
-                                    <!-- BEGIN MODULE: Subtitle -->
                                     <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation">
                                         <tr>
                                             <td style="padding: 0px 0px 0px 0px;">
@@ -495,7 +437,7 @@
                                                                                 <td valign="top" align="left" style="padding: 0px 0px 35px 0px;">
                                                                                     <div class="pc-font-alt" style="text-decoration: none;">
                                                                                         <div style="font-size: 15px;line-height: 21px;text-align:center;text-align-last:center;color:#c7cbce;font-style:normal;font-weight:600;letter-spacing:-0.2px;font-variant-ligatures:normal;">
-                                                                                            <div><span style="font-family: 'Fira Sans', Arial, Helvetica, sans-serif; font-size: 15px; line-height: 21px; text-decoration: none; text-transform: none;">No matter how you got here, thank you. Thank you for supporting Realty Interface with your clicks, engagement, and feedback. Whether it’s every day, once a week, once a month – it means a lot.&nbsp;&nbsp;</span>
+                                                                                            <div><span style="font-family: 'Fira Sans', Arial, Helvetica, sans-serif; font-size: 15px; line-height: 21px; text-decoration: none; text-transform: none;">No matter how you got here, thank you. Thank you for supporting {{ config('app.name') }} with your clicks, engagement, and feedback. Whether it's every day, once a week, once a month – it means a lot.&nbsp;&nbsp;</span>
                                                                                                 <br>
                                                                                             </div>
                                                                                         </div>
@@ -512,12 +454,10 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    <!-- END MODULE: Subtitle -->
                                 </td>
                             </tr>
                             <tr>
                                 <td valign="top">
-                                    <!-- BEGIN MODULE: Image -->
                                     <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation">
                                         <tr>
                                             <td style="padding: 0px 0px 0px 0px;">
@@ -528,7 +468,7 @@
                                                                 <tr>
                                                                     <td valign="top" style="padding: 35px 0px 0px 0px;">
                                                                         <a class="pc-font-alt" href="https://www.instagram.com/realtyinterface/" style="text-decoration: none;">
-                                                                            <img src="{{ asset('images/image-1739041984884.png') }}" width="600" height="auto" alt="" style="display: block; outline: 0; line-height: 100%; -ms-interpolation-mode: bicubic; width: 100%; height: auto; border: 0;" />
+                                                                            <img src="{{ asset('images/email-follow-us.png') }}" width="600" height="auto" alt="" style="display: block; outline: 0; line-height: 100%; -ms-interpolation-mode: bicubic; width: 100%; height: auto; border: 0;" />
                                                                         </a>
                                                                     </td>
                                                                 </tr>
@@ -539,12 +479,10 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    <!-- END MODULE: Image -->
                                 </td>
                             </tr>
                             <tr>
                                 <td valign="top">
-                                    <!-- BEGIN MODULE: Footer 6 -->
                                     <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation">
                                         <tr>
                                             <td style="padding: 0px 0px 0px 0px;">
@@ -567,7 +505,7 @@
                                                                                                                 <tr>
                                                                                                                     <td valign="top">
                                                                                                                         <a class="pc-font-alt" href="https://www.instagram.com/realtyinterface/" style="text-decoration: none;">
-                                                                                                                            <img src="{{ asset('images/0ec0654339cc5290f22ece6609160f81.png') }}" class="" width="20" height="20" style="display: block; border: 0; outline: 0; line-height: 100%; -ms-interpolation-mode: bicubic; width: 20px; height: 20px;" alt="" />
+                                                                                                                            <img src="{{ asset('images/icon-instagram.png') }}" class="" width="20" height="20" style="display: block; border: 0; outline: 0; line-height: 100%; -ms-interpolation-mode: bicubic; width: 20px; height: 20px;" alt="" />
                                                                                                                         </a>
                                                                                                                     </td>
                                                                                                                 </tr>
@@ -593,7 +531,7 @@
                                                                                     <div class="pc-font-alt" style="text-decoration: none;">
                                                                                         <div style="font-size: 14px;line-height: 20px;text-align:center;text-align-last:center;color:#d8d8d8;letter-spacing:-0.2px;font-weight:400;font-style:normal;font-variant-ligatures:normal;">
                                                                                             <div><span style="font-family: 'Fira Sans', Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; text-decoration: none; text-transform: none;">Gig Harbor, Washington</span>
-                                                                                                <br><span style="font-family: 'Fira Sans', Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; text-decoration: none; text-transform: none;">Realty Interface ©2023</span>
+                                                                                                <br><span style="font-family: 'Fira Sans', Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; text-decoration: none; text-transform: none;">{{ config('app.name') }} ©{{ date('Y') }}</span>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -619,7 +557,7 @@
                                                                                                                 <tr>
                                                                                                                     <td align="center" valign="top" style="padding: 0px 50px 20px 50px;">
                                                                                                                         <a class="pc-font-alt" href="https://www.realtyinterface.com/" target="_blank" style="text-decoration: none;">
-                                                                                                                            <img src="{{ asset('images/image-1738189974054.png') }}" width="130" height="auto" alt="Realty Interface Luxury Websites" style="display: block; outline: 0; line-height: 100%; -ms-interpolation-mode: bicubic; width: 52%; height: auto; border: 0;" />
+                                                                                                                            <img src="{{ asset('images/logo-placeholder.png') }}" width="130" height="auto" alt="{{ config('app.name') }}" style="display: block; outline: 0; line-height: 100%; -ms-interpolation-mode: bicubic; width: 52%; height: auto; border: 0;" />
                                                                                                                         </a>
                                                                                                                     </td>
                                                                                                                 </tr>
@@ -658,7 +596,6 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    <!-- END MODULE: Footer 6 -->
                                 </td>
                             </tr>
                         </table>

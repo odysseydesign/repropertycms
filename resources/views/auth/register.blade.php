@@ -1,9 +1,9 @@
 @include('includes.agents.head')
 <div class="w-100 h-100 login-page"
-     style='background-image: url("{{ asset('images/signup-background.jpg') }}"); padding:100px 0px;background-size:cover;'>
+     style='background-image: url("{{ asset('images/auth-background.jpg') }}"); padding:100px 0px;background-size:cover;'>
     <div class="rounded-lg p-8 agentsign" style="width: 35%; margin: 0px auto; background-color:rgba(0, 0, 0, 0.4)">
         <div class="agnet_logo">
-            <img src="{{asset('images/logo_small.png')}}" alt="Logo Not Found !">
+            <img src="{{asset('images/logo-placeholder-small.png')}}" alt="Logo Not Found !">
         </div>
 
         <!-- Validation Errors -->

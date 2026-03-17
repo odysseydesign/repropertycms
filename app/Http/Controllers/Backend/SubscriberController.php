@@ -7,6 +7,6 @@ use App\Http\Controllers\Controller;
 class SubscriberController extends Controller
 {
     public function index() {
-	    return view('backend.subscriber.index');
+	    return view('admin.subscriber.index');
     }
 }

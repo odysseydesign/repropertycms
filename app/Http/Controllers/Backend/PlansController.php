@@ -11,7 +11,7 @@ class PlansController extends Controller
     public function index()
     {
 
-        return view('backend.plans.index');
+        return view('admin.plans.index');
     }
 
     public function status(Request $request)
@@ -48,7 +48,7 @@ class PlansController extends Controller
         $plan->credits = $request['credits'];
 
         if ($plan->save()) {
-            return redirect('/backend/plans/index')->with('success', 'Added New Membership Plan successfully.');
+            return redirect('/admin/plans/index')->with('success', 'Added New Membership Plan successfully.');
         } else {
             return redirect()->back()->with('error', 'Error Saving Data ! ');
         }

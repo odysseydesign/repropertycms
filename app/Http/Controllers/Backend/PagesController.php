@@ -12,13 +12,13 @@ class PagesController extends Controller
     public function index()
     {
 
-        return view('backend.pages.index');
+        return view('admin.pages.index');
     }
 
     public function create()
     {
 
-        return view('backend.pages.create');
+        return view('admin.pages.create');
     }
 
     public function update($id = null)
@@ -26,9 +26,9 @@ class PagesController extends Controller
         if (! is_null($id)) {
             $page = Pages::find($id);
 
-            return view('backend.pages.add', ['page' => $page]);
+            return view('admin.pages.add', ['page' => $page]);
         } else {
-            return view('backend.pages.add');
+            return view('admin.pages.add');
         }
     }
 
@@ -57,12 +57,12 @@ class PagesController extends Controller
             $page->content = $data['content'];
 
             if ($page->save()) {
-                return redirect()->route('backend.pages')->with('success', 'Page saved successfully.');
+                return redirect()->route('admin.pages')->with('success', 'Page saved successfully.');
             } else {
-                return redirect()->route('backend.add')->with('error', 'Failed to save Page.');
+                return redirect()->route('admin.add')->with('error', 'Failed to save Page.');
             }
         } else {
-            return redirect('backend.add')->with('error', "Title can't be empty.");
+            return redirect('admin.add')->with('error', "Title can't be empty.");
         }
     }
 
@@ -80,10 +80,10 @@ class PagesController extends Controller
                     $data['message'] = 'Page is not deleted';
                 }
             } else {
-                return redirect()->route('backend.pages')->with('error', "Page doesn't exist.");
+                return redirect()->route('admin.pages')->with('error', "Page doesn't exist.");
             }
         } else {
-            return redirect()->route('backend.pages')->with('error', 'Invalid id.');
+            return redirect()->route('admin.pages')->with('error', 'Invalid id.');
         }
 
         return response()->json($data);
@@ -107,10 +107,10 @@ class PagesController extends Controller
                     $data['success'] = '0';
                 }
             } else {
-                return redirect()->route('backend.pages')->with('error', "Page doesn't exist.");
+                return redirect()->route('admin.pages')->with('error', "Page doesn't exist.");
             }
         } else {
-            return redirect()->route('backend.pages')->with('error', 'Invalid id.');
+            return redirect()->route('admin.pages')->with('error', 'Invalid id.');
         }
 
         return response()->json($data);

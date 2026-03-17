@@ -1,4 +1,4 @@
-@php $currentStep = 8; @endphp
+@php $currentStep = 9; @endphp
 @extends('layouts.setup')
 
 @section('title', 'Complete Installation')
@@ -60,7 +60,7 @@
     </form>
 
     <div class="mt-4 text-center">
-        <a href="{{ route('setup.captcha') }}" class="text-sm text-gray-400 hover:text-gray-600">
+        <a href="{{ route('setup.branding') }}" class="text-sm text-gray-400 hover:text-gray-600">
             ← Go back and make changes
         </a>
     </div>

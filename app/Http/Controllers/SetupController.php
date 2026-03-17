@@ -423,7 +423,7 @@ class SetupController extends Controller
         $setup['captcha_skipped'] = false;
         session(['setup' => $setup]);
 
-        return redirect()->route('setup.final');
+        return redirect()->route('setup.branding');
     }
 
     public function skipCaptcha()
@@ -432,12 +432,58 @@ class SetupController extends Controller
         $setup['captcha_skipped'] = true;
         session(['setup' => $setup]);
 
+        return redirect()->route('setup.branding');
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 8 — Brand Identity (Logo & Favicon)
+    |--------------------------------------------------------------------------
+    */
+
+    public function branding()
+    {
+        $brand = DB::table('brand_settings')->first();
+        return view('setup.branding', compact('brand'));
+    }
+
+    public function saveBranding(Request $request)
+    {
+        $request->validate([
+            'logo'    => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'favicon' => 'nullable|file|mimes:ico,png,jpg,jpeg,svg|max:512',
+        ]);
+
+        $data = ['updated_at' => now(), 'created_at' => now()];
+
+        foreach (['logo', 'favicon'] as $field) {
+            if ($request->hasFile($field) && $request->file($field)->isValid()) {
+                $dir = public_path('images/brand');
+                if (!is_dir($dir)) {
+                    mkdir($dir, 0755, true);
+                }
+                $ext = $request->file($field)->getClientOriginalExtension();
+                $request->file($field)->move($dir, $field . '.' . $ext);
+                $data[$field . '_path'] = 'images/brand/' . $field . '.' . $ext;
+            }
+        }
+
+        if (count($data) > 2) {
+            DB::table('brand_settings')->updateOrInsert(['id' => 1], $data);
+            cache()->forget('brand_settings');
+        }
+
+        return redirect()->route('setup.final');
+    }
+
+    public function skipBranding()
+    {
         return redirect()->route('setup.final');
     }
 
     /*
     |--------------------------------------------------------------------------
-    | STEP 8 — Final Review & Complete Installation
+    | STEP 9 — Final Review & Complete Installation
     |--------------------------------------------------------------------------
     */
 
@@ -473,6 +519,9 @@ class SetupController extends Controller
                 ]
             );
         }
+
+        // Seed required reference data (countries, states, amenities, plans)
+        Artisan::call('db:seed', ['--class' => 'SetupSeeder', '--force' => true]);
 
         session()->flush();
 

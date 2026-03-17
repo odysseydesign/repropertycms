@@ -1,8 +1,14 @@
+@php
+    $brand = cache()->remember('brand_settings', 3600, fn() =>
+        \Illuminate\Support\Facades\DB::table('brand_settings')->first()
+    );
+    $brandLogo = ($brand && $brand->logo_path) ? asset($brand->logo_path) : asset('images/logo-placeholder-small.png');
+@endphp
 <aside class="md:block md:w-auto" aria-label="Sidebar">
     <ul>
         <li>
             <a href="{{url('/agent/dashboard')}}" class="py-2">
-                <img src="{{ asset('/images/logo_small.png') }}" alt="">
+                <img src="{{ $brandLogo }}" alt="{{ config('app.name') }}">
             </a>
         </li>
 

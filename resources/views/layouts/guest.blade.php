@@ -21,6 +21,9 @@
 
     @livewireStyles
 
+    <!-- Brand CSS variables (colors + fonts) -->
+    @include('includes.brand-styles')
+
 {{-- Shared JS (axios + CSRF guard) --}}
 @if (file_exists(public_path('build/manifest.json')))
     {{-- Vite --}}
@@ -41,7 +44,7 @@
 
         <nav class="flex-wrap lg:flex items-center" x-data="{navbarOpen:false}">
             <div class="flex items-center mb-10 lg:mb-0">
-                <img src="{{ asset('images/realtyinterface_logo.png') }}" width="150px" alt="Logo">
+                <img src="{{ asset('images/logo-placeholder.png') }}" width="150px" alt="Logo">
 
                 <button class="lg:hidden w-10 h-10 ml-auto flex items-center justify-center border border-blue-500 text-blue-500 rounded-md"
                         @click="navbarOpen = !navbarOpen">
@@ -70,8 +73,8 @@
             </div>
         </nav>
 
-        <div class="flex flex-col lg:flex-row justify-between space-x-20">
-            <div class="text-center lg:text-left mt-10">
+        <div class="flex flex-col lg:flex-row justify-between gap-10 my-20 ">
+            <div class="text-center lg:text-left mt-10 lg:w-1/2">
                 <h1 class="font-semibold text-white text-3xl md:text-6xl leading-normal mb-6">Get Started</h1>
 
                 <p class="font-light text-gray-400 text-md md:text-lg leading-normal mb-12">Create and have access to
@@ -83,8 +86,8 @@
                 </button>
             </div>
 
-            <div class="mt-0">
-                <img src="{{ asset('images/signup.jpg') }}" alt="Image">
+            <div class="mt-0 lg:w-1/2">
+                <img src="{{ asset('images/auth-side-panel.jpg') }}" alt="Image" class="w-full h-full object-cover rounded-lg">
             </div>
         </div>
 
@@ -102,7 +105,7 @@
 
             <div class="space-y-7 mb-10 lg:mb-0">
                 <div class="flex justify-center lg:justify-start">
-                    <img src="{{ asset('images/realtyinterface_logo.png') }}" width="150px" alt="Image">
+                    <img src="{{ asset('images/logo-placeholder.png') }}" width="150px" alt="Image">
                 </div>
 
                 <p class="font-light text-gray-400 text-md md:text-lg text-center lg:text-left">Realty Interface

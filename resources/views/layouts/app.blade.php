@@ -23,6 +23,9 @@
 {{-- Livewire styles --}}
 @livewireStyles
 
+    <!-- Brand CSS variables (colors + fonts) -->
+    @include('includes.brand-styles')
+
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">

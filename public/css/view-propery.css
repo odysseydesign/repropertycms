@@ -1,5 +1,5 @@
 :root {
-    --primary-color: #28ADC4;
+    
 }
 
 .main-banner img,
@@ -10,14 +10,14 @@
 
 body,
 * {
-    font-family: 'Lato', sans-serif;
+    font-family: var(--font-body);
 }
 
 .property_price_section,
 .agent_name,
 .property-feature,
 .property-page-title {
-    font-family: 'Julius Sans One', sans-serif;
+    font-family: var(--font-heading), sans-serif;
 }
 
 .site-color {
@@ -25,7 +25,7 @@ body,
 }
 
 .address_bar {
-    background: #152636;
+    background: var(--sidebar-color);
 }
 
 .property_amenities {
@@ -177,7 +177,7 @@ h2 {
 .footer-block a {
     color: #FFF;
     margin-top: 20px;
-    font-family: 'Julius Sans One', sans-serif;
+    font-family: var(--font-heading), sans-serif;
 }
 @media (min-width: 1900px) {
     .propery-view .gallery-default-image img {

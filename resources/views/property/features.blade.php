@@ -8,7 +8,7 @@
                     </div>
                 @else
                     <div class="col-6 col-md-4 p-0 order-0">
-                        <img src="{{asset('images/bedrealtyinterface1.jpg')}}" class="feature-property-img" alt="">
+                        <img src="{{asset('images/placeholder-bedroom.jpg')}}" class="feature-property-img" alt="">
                     </div>
                 @endif
 
@@ -26,7 +26,7 @@
                     </div>
                 @else
                     <div class="col-6 col-md-4 p-0 order-3 order-md-2">
-                        <img src="{{asset('images/bedrealtyinterface4.jpg')}}" class="feature-property-img" alt="">
+                        <img src="{{asset('images/placeholder-fireplace-room.jpg')}}" class="feature-property-img" alt="">
                     </div>
                 @endif
 
@@ -44,7 +44,7 @@
                     </div>
                 @else
                     <div class="col-6 col-md-4 p-0 order-4">
-                        <img src="{{asset('images/bedrealtyinterface3.jpg')}}" class="feature-property-img" alt="">
+                        <img src="{{asset('images/placeholder-living-room.jpg')}}" class="feature-property-img" alt="">
                     </div>
                 @endif
 

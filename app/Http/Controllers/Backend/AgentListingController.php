@@ -17,7 +17,7 @@ class AgentListingController extends Controller
     {
         $agents = Agents::all();
 
-        return view('backend.agent-listing', compact('agents'));
+        return view('admin.agent-listing', compact('agents'));
     }
 
     public function status(Request $request)
@@ -88,7 +88,7 @@ class AgentListingController extends Controller
                         $message->subject('Password Reset');
                     });
 
-                    return redirect('/backend/agent-listing')->with('success', 'Password successfully updated.');
+                    return redirect('/admin/agent-listing')->with('success', 'Password successfully updated.');
                 } else {
                     return redirect()->back()->with('error', 'Error Saving Data ! ');
                 }

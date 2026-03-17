@@ -39,7 +39,7 @@
     @endphp
         @if(request()->has('newSignup') && request()->get('newSignup') == true)
             <div class="welcome-banner text-center">
-                <img src="{{ asset('images/3d-house-icon.png') }}" alt="Welcome Icon" class="banner-icon">
+                <img src="{{ asset('images/icon-house-3d.png') }}" alt="Welcome Icon" class="banner-icon">
                 <h1>Welcome to <span class="brand-name">Realty Interface</span></h1>
                 <p>Your journey to a beautifully designed, story-driven property website begins here. Enter your property details below and let us transform them into an exceptional digital showcase.</p>
             </div>

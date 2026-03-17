@@ -7,7 +7,7 @@
         </button>
     </div>
     <div class="credit-plans">
-        <form action="{{url('backend/plans/add')}}" method="get">
+        <form action="{{url('admin/plans/add')}}" method="get">
             @csrf
             <div class="dialog">
                 <div class="dialog-overlay" dialog-close="true"></div>

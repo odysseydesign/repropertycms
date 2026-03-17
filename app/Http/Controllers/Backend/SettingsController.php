@@ -31,7 +31,7 @@ class SettingsController extends Controller
             'captcha' => $integrations['captcha'] ?? false,
         ];
 
-        return view('backend.settings.index', compact('statuses'));
+        return view('admin.settings.index', compact('statuses'));
     }
 
     /*
@@ -58,7 +58,7 @@ class SettingsController extends Controller
         // Mask password — never expose to view
         $current['password_set'] = !empty(config('mail.mailers.smtp.password'));
 
-        return view('backend.settings.mail', compact('current', 'isConfigured'));
+        return view('admin.settings.mail', compact('current', 'isConfigured'));
     }
 
     public function saveMail(Request $request, EnvService $env)
@@ -93,7 +93,7 @@ class SettingsController extends Controller
             ['is_setup' => true, 'updated_at' => now(), 'created_at' => now()]
         );
 
-        return redirect()->route('backend.settings.mail')
+        return redirect()->route('admin.settings.mail')
             ->with('success', 'Mail settings saved successfully.');
     }
 
@@ -140,7 +140,7 @@ class SettingsController extends Controller
             'secret_set'  => !empty(config('services.stripe.secret')),
         ];
 
-        return view('backend.settings.stripe', compact('current', 'isConfigured'));
+        return view('admin.settings.stripe', compact('current', 'isConfigured'));
     }
 
     public function saveStripe(Request $request, EnvService $env)
@@ -166,7 +166,7 @@ class SettingsController extends Controller
             ['is_setup' => true, 'updated_at' => now(), 'created_at' => now()]
         );
 
-        return redirect()->route('backend.settings.stripe')
+        return redirect()->route('admin.settings.stripe')
             ->with('success', 'Stripe settings saved successfully.');
     }
 
@@ -203,7 +203,7 @@ class SettingsController extends Controller
             'aws_secret_set' => !empty(config('filesystems.disks.s3.secret')),
         ];
 
-        return view('backend.settings.storage', compact('current', 'isConfigured'));
+        return view('admin.settings.storage', compact('current', 'isConfigured'));
     }
 
     public function saveStorage(Request $request, EnvService $env)
@@ -238,7 +238,7 @@ class SettingsController extends Controller
             ['is_setup' => true, 'updated_at' => now(), 'created_at' => now()]
         );
 
-        return redirect()->route('backend.settings.storage')
+        return redirect()->route('admin.settings.storage')
             ->with('success', 'Storage settings saved successfully.');
     }
 
@@ -281,7 +281,7 @@ class SettingsController extends Controller
             'secret_set' => !empty(config('services.recaptcha.secret_key')),
         ];
 
-        return view('backend.settings.captcha', compact('current', 'isConfigured'));
+        return view('admin.settings.captcha', compact('current', 'isConfigured'));
     }
 
     public function saveCaptcha(Request $request, EnvService $env)
@@ -303,7 +303,7 @@ class SettingsController extends Controller
             ['is_setup' => true, 'updated_at' => now(), 'created_at' => now()]
         );
 
-        return redirect()->route('backend.settings.captcha')
+        return redirect()->route('admin.settings.captcha')
             ->with('success', 'reCAPTCHA settings saved successfully.');
     }
 
@@ -324,5 +324,71 @@ class SettingsController extends Controller
         }
 
         return response()->json(['success' => true, 'message' => 'Keys look valid. Save to apply them.']);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Brand & Appearance Settings
+    |--------------------------------------------------------------------------
+    */
+
+    public function brand()
+    {
+        $brand = DB::table('brand_settings')->first();
+
+        return view('admin.settings.brand', compact('brand'));
+    }
+
+    public function saveBrand(Request $request)
+    {
+        $request->validate([
+            'primary_color'   => ['required', 'regex:/^#[0-9A-Fa-f]{6}$/'],
+            'secondary_color' => ['required', 'regex:/^#[0-9A-Fa-f]{6}$/'],
+            'accent_color'    => ['required', 'regex:/^#[0-9A-Fa-f]{6}$/'],
+            'accent_2_color'  => ['required', 'regex:/^#[0-9A-Fa-f]{6}$/'],
+            'sidebar_color'   => ['required', 'regex:/^#[0-9A-Fa-f]{6}$/'],
+            'font_body'       => 'required|string|max:100',
+            'font_heading'    => 'required|string|max:100',
+            'font_admin'      => 'required|string|max:100',
+            'logo'            => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'favicon'         => 'nullable|file|mimes:ico,png,jpg,jpeg,svg|max:512',
+        ]);
+
+        $data = [
+            'primary_color'   => $request->primary_color,
+            'secondary_color' => $request->secondary_color,
+            'accent_color'    => $request->accent_color,
+            'accent_2_color'  => $request->accent_2_color,
+            'sidebar_color'   => $request->sidebar_color,
+            'font_body'       => $request->font_body,
+            'font_heading'    => $request->font_heading,
+            'font_admin'      => $request->font_admin,
+            'updated_at'      => now(),
+            'created_at'      => now(),
+        ];
+
+        // Handle logo and favicon uploads
+        foreach (['logo', 'favicon'] as $field) {
+            if ($request->hasFile($field) && $request->file($field)->isValid()) {
+                $old = DB::table('brand_settings')->value($field . '_path');
+                if ($old && file_exists(public_path($old))) {
+                    @unlink(public_path($old));
+                }
+                $dir = public_path('images/brand');
+                if (!is_dir($dir)) {
+                    mkdir($dir, 0755, true);
+                }
+                $ext = $request->file($field)->getClientOriginalExtension();
+                $request->file($field)->move($dir, $field . '.' . $ext);
+                $data[$field . '_path'] = 'images/brand/' . $field . '.' . $ext;
+            }
+        }
+
+        DB::table('brand_settings')->updateOrInsert(['id' => 1], $data);
+
+        cache()->forget('brand_settings');
+
+        return redirect()->route('admin.settings.brand')
+            ->with('success', 'Brand settings saved successfully.');
     }
 }

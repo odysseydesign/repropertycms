@@ -36,6 +36,6 @@ class DashboardController extends Controller
 
         $data = compact('proeprty_descending_order', 'agent_descending_order', 'credit_logs_descending_order', 'subscriptions');
 
-        return view('backend.dashboard')->with($data);
+        return view('admin.dashboard')->with($data);
     }
 }

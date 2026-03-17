@@ -21,7 +21,7 @@ class RouteServiceProvider extends ServiceProvider
 
     public const AGENT_HOME = '/agent/dashboard';
 
-    public const ADMIN_HOME = '/backend/dashboard';
+    public const ADMIN_HOME = '/admin/dashboard';
 
     /**
      * The controller namespace for the application.
@@ -48,8 +48,8 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/api.php'));
 
             Route::middleware('web')
-                ->prefix('backend')
-                ->name('backend.')
+                ->prefix('admin')
+                ->name('admin.')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/admin.php'));
 

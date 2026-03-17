@@ -38,7 +38,7 @@ Route::namespace('Backend')->group(function () {
     | Authenticated Admin Routes
     |--------------------------------------------------------------------------
     */
-    Route::middleware('backend')->group(function () {
+    Route::middleware('admin')->group(function () {
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::namespace('Auth')->group(function () {
@@ -115,6 +115,9 @@ Route::namespace('Backend')->group(function () {
             Route::get('captcha', [SettingsController::class, 'captcha'])->name('captcha');
             Route::post('captcha', [SettingsController::class, 'saveCaptcha'])->name('captcha.save');
             Route::post('captcha/test', [SettingsController::class, 'testCaptcha'])->name('captcha.test');
+
+            Route::get('brand', [SettingsController::class, 'brand'])->name('brand');
+            Route::post('brand', [SettingsController::class, 'saveBrand'])->name('brand.save');
         });
     });
 

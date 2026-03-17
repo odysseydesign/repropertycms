@@ -1,5 +1,5 @@
 * {
-    font-family: 'Julius Sans One', sans-serif;
+    font-family: var(--font-heading), sans-serif;
 }
 
 #myVideo {

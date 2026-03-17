@@ -3,7 +3,7 @@
     margin: 0px auto;
     background-color: #0000008a !important;">
     <div class="agnet_logo">
-        <img src="{{asset('images/realtyinterface_logo.png')}}" alt="Logo Not Found !">
+        <img src="{{asset('images/logo-placeholder.png')}}" alt="Logo Not Found !">
     </div>
 </div>
 <div class="signup-form bg-grey-100 border-2 border-solid border-grey-300 px-8 "

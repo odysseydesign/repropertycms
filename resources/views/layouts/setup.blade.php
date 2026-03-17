@@ -51,7 +51,8 @@
             5 => 'Payments',
             6 => 'Storage',
             7 => 'Security',
-            8 => 'Complete',
+            8 => 'Branding',
+            9 => 'Complete',
         ];
     @endphp
 

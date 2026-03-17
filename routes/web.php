@@ -19,6 +19,12 @@ use App\Http\Controllers\Agent\VideoController;
 use App\Http\Controllers\Agent\DashboardController;
 use App\Http\Controllers\SetupController;
 
+// TEMP: Mail preview routes — remove before production
+Route::get('/mail-preview/agent-registered', function () {
+    $agent = \App\Models\Agents::first() ?? (object)['first_name' => 'John'];
+    return view('mail.agent_registered', ['agent' => $agent]);
+});
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -138,6 +144,20 @@ Route::prefix('setup')->name('setup.')->group(function () {
 
     Route::post('captcha-skip', [SetupController::class, 'skipCaptcha'])
         ->name('captcha.skip');
+    /*
+    |--------------------------------------------------------------------------
+    | Brand Identity (Step 8 — skippable)
+    |--------------------------------------------------------------------------
+    */
+    Route::get('branding', [SetupController::class, 'branding'])
+        ->name('branding');
+
+    Route::post('branding', [SetupController::class, 'saveBranding'])
+        ->name('branding.save');
+
+    Route::post('branding-skip', [SetupController::class, 'skipBranding'])
+        ->name('branding.skip');
+
     /*
     |--------------------------------------------------------------------------
     | Final
