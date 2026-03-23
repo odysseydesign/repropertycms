@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Models\Backend\Admin;
 use App\Notifications\AdminRegisteredNotification;
 use App\Notifications\AgentRegistered;
 use Illuminate\Auth\Events\Registered;
@@ -36,8 +37,11 @@ class SendRegisteredNotification
             // Welcome email to agent
             $agent->notify(new AgentRegistered($agent));
 
-            Notification::route('mail', 'email@riemailtask.com') // or use an admin model here.
-                ->notify(new AdminRegisteredNotification($agent));
+            $adminEmail = Admin::first()?->email;
+            if ($adminEmail) {
+                Notification::route('mail', $adminEmail)
+                    ->notify(new AdminRegisteredNotification($agent));
+            }
 
         } catch (\Exception $ex) {
             Log::error($ex->getMessage());

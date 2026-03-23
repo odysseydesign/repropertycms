@@ -88,7 +88,6 @@
 
 <!-- admin dashboard foot -->
 @include('includes.agents.foot')
-<script src="{{ asset('vendor/wire-elements-pro/js/overlay-component.js') }}"></script>
 <script src="https://js.sentry-cdn.com/ac2a864e10873b117bc3feac3ecd6fbe.min.js" crossorigin="anonymous"></script>
 <script>
     Sentry.onLoad(function() {
@@ -98,7 +97,7 @@
       });
     });
   </script>
-@livewire('modal-pro')
+@livewire('agent.plans')
 @livewireScripts
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <x-livewire-alert::scripts/>

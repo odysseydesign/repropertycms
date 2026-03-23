@@ -199,12 +199,22 @@ class AgentsController extends Controller
     {
         $agent = session('agent');
         $validator = Validator::make($request->all(), [
-            'profile_image' => 'required|mimes:png,jpg,jpeg',
+            'profile_image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:20480',
         ]);
 
         if ($validator->fails()) {
             $request->session()->flash('error', $validator->errors()->first('profile_image'));
         } else {
+            // Deep MIME type verification
+            $finfo    = finfo_open(FILEINFO_MIME_TYPE);
+            $mimeType = finfo_file($finfo, $request->file('profile_image')->getRealPath());
+            finfo_close($finfo);
+
+            if (!in_array($mimeType, ['image/jpeg', 'image/png', 'image/gif', 'image/webp'])) {
+                $request->session()->flash('error', 'Invalid file type detected. Only image files are allowed.');
+                return redirect('/agent/profile');
+            }
+
             // Upload image on S3
             $path = uploadS3Image('agents', $request->profile_image);
             $status = Agents::where('id', '=', $agent->id)->update(['profile_image' => $path]);
@@ -265,12 +275,22 @@ class AgentsController extends Controller
     {
         $agent = session('agent');
         $validator = Validator::make($request->all(), [
-            'logo_image' => 'required|mimes:png,jpg,jpeg',
+            'logo_image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:20480',
         ]);
 
         if ($validator->fails()) {
             $request->session()->flash('error', $validator->errors()->first('logo_image'));
         } else {
+            // Deep MIME type verification
+            $finfo    = finfo_open(FILEINFO_MIME_TYPE);
+            $mimeType = finfo_file($finfo, $request->file('logo_image')->getRealPath());
+            finfo_close($finfo);
+
+            if (!in_array($mimeType, ['image/jpeg', 'image/png', 'image/gif', 'image/webp'])) {
+                $request->session()->flash('error', 'Invalid file type detected. Only image files are allowed.');
+                return redirect('/agent/profile');
+            }
+
             // Upload image on S3
             $path = uploadS3Image('agents', $request->logo_image);
             $status = Agents::where('id', '=', $agent->id)->update(['logo_image' => $path]);

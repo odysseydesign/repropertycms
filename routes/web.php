@@ -20,10 +20,10 @@ use App\Http\Controllers\Agent\DashboardController;
 use App\Http\Controllers\SetupController;
 
 // TEMP: Mail preview routes — remove before production
-Route::get('/mail-preview/agent-registered', function () {
-    $agent = \App\Models\Agents::first() ?? (object)['first_name' => 'John'];
-    return view('mail.agent_registered', ['agent' => $agent]);
-});
+// Route::get('/mail-preview/agent-registered', function () {
+//     $agent = \App\Models\Agents::first() ?? (object)['first_name' => 'John'];
+//     return view('mail.agent_registered', ['agent' => $agent]);
+// });
 
 /*
 |--------------------------------------------------------------------------

@@ -4,4 +4,5 @@
 
 @section('content')
     @livewire('agent.topbar.choose', ['property' => $property])
+    @livewire('agent.topbar.image')
 @endsection

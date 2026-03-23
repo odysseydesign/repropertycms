@@ -56,14 +56,26 @@ class VideoController extends Controller
             } else {
 
                 $validator = Validator::make($request->all(), [
-                    'file' => 'required | mimes:mp4,mov,ogg',
+                    'file' => 'required|file|mimes:mp4,mov,avi,wmv,flv,webm|max:102400',
                 ]);
                 if ($validator->fails()) {
                     $data['success'] = 0;
                     $data['error'] = $validator->errors()->first('file'); // Error response
                 } else {
                     $video = $request->file('file');
-                    $video_name = time().'_'.$video->getClientOriginalName();
+
+                    // Deep MIME type verification
+                    $finfo    = finfo_open(FILEINFO_MIME_TYPE);
+                    $mimeType = finfo_file($finfo, $video->getRealPath());
+                    finfo_close($finfo);
+
+                    if (!in_array($mimeType, ['video/mp4', 'video/quicktime', 'video/x-msvideo', 'video/x-ms-wmv', 'video/x-flv', 'video/webm'])) {
+                        return response()->json(['success' => 0, 'error' => 'Invalid file type detected. Only video files are allowed.']);
+                    }
+
+                    // Sanitize filename
+                    $safeName   = preg_replace('/[^a-zA-Z0-9_\-]/', '_', pathinfo($video->getClientOriginalName(), PATHINFO_FILENAME));
+                    $video_name = time() . '_' . $safeName . '.' . $video->getClientOriginalExtension();
 
                     // File upload location
                     $path = public_path().'/files/property_videos/'.$property['id'];

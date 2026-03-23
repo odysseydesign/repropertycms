@@ -4,18 +4,33 @@ namespace App\Livewire\Agent;
 
 use App\Models\Plan;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\On;
+use Livewire\Component;
 use Stripe\Checkout\Session;
 use Stripe\Exception\ApiErrorException;
 use Stripe\Stripe;
-use WireElements\Pro\Components\Modal\Modal;
 
-class Plans extends Modal
+class Plans extends Component
 {
     use LivewireAlert;
+
+    public bool $show = false;
 
     public $agent;
 
     public $plans;
+
+    #[On('open-agent-plans')]
+    public function openModal(): void
+    {
+        $this->plans = Plan::where('active', 1)->get();
+        $this->show = true;
+    }
+
+    public function closeModal(): void
+    {
+        $this->show = false;
+    }
 
     public function save() {}
 
@@ -45,7 +60,7 @@ class Plans extends Modal
                 'metadata' => [
                     'agent_id' => $this->agent->id,
                 ],
-                // 👇 Enable promo code field in Stripe Checkout
+                // Enable promo code field in Stripe Checkout
                 'discounts' => $plan->name == 'Pilot' ? [
                     [
                         'promotion_code' => null, // user will input it manually in Checkout
@@ -59,7 +74,7 @@ class Plans extends Modal
             // Handle Stripe API errors
             $this->alert('error', 'Subscription failed: '.$e->getMessage());
         }
-        $this->close();
+        $this->show = false;
     }
 
     public function mount()

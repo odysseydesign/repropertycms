@@ -4,4 +4,6 @@
 
 @section('content')
     @livewire('video.index', ['property' => $property])
+    @livewire('video.add')
+    @livewire('video.view')
 @stop

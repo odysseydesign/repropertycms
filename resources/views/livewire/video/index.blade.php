@@ -1,8 +1,8 @@
-<div>
+<div x-data="{ confirmId: null }">
     <div class="d-flex align-items-center justify-content-between my-4 flex-wrap page-heading">
         <h5 class="mb-0">Property Videos</h5>
         <a href="#"
-           onclick="Livewire.dispatch('modal.open', {component: 'video.add', arguments: { 'property': {{ $property->id }} } })"
+           onclick="Livewire.dispatch('open-video-add', { propertyId: {{ $property->id }} })"
            class="btn-blue m-0">
             <i class="fa fa-plus mr-1"></i> Add Video
         </a>
@@ -27,7 +27,7 @@
                                 <img src="{{ getYoutubeThumbnail($property_video->video_url) }}"
                                      class="max-w-full h-auto">
                                 <a href="#"
-                                   onclick="Livewire.dispatch('modal.open', {component: 'video.view', arguments: { 'property': {{ $property->id }}, 'property_video': {{ $property_video->id }} } })">
+                                   onclick="Livewire.dispatch('open-video-view', { propertyId: {{ $property->id }}, videoId: {{ $property_video->id }} })">
                                 </a>
                             </div>
                         @elseif($property_video->video_type == \App\Enums\VideoType::Vimeo)
@@ -36,7 +36,7 @@
                                 <img src="{{ getVimeoThumbnail($property_video->video_url) }}"
                                      class="max-w-full h-auto">
                                 <a href="#"
-                                   onclick="Livewire.dispatch('modal.open', {component: 'video.view', arguments: { 'property': {{ $property->id }}, 'property_video': {{ $property_video->id }} } })">
+                                   onclick="Livewire.dispatch('open-video-view', { propertyId: {{ $property->id }}, videoId: {{ $property_video->id }} })">
                                 </a>
                             </div>
                         @else
@@ -45,7 +45,7 @@
                         <div class="card-body">
                             Display as:
                             <a href="#" class="py-1 px-2 mb-1"
-                               onclick="Livewire.dispatch('modal.open', {component: 'video.view', arguments: { 'property': {{ $property->id }}, 'property_video': {{ $property_video->id }} } })">
+                               onclick="Livewire.dispatch('open-video-view', { propertyId: {{ $property->id }}, videoId: {{ $property_video->id }} })">
                                 @if ($property_video->featured && $property_video->main_video)
                                     Cover & Featured
                                 @elseif ($property_video->main_video)
@@ -58,7 +58,8 @@
                             </a>
                             <button class="button button-red py-1 px-2 mb-1 ml-5 float-right text-red-600"
                                     title="Delete"
-                                    wire:click="deleteVideo({{ $property_video->id }})">Delete
+                                    type="button"
+                                    @click="confirmId = {{ $property_video->id }}">Delete
                             </button>
                         </div>
                     </div>
@@ -72,5 +73,20 @@
                     class="fa fa-arrow-left mr-2"></i> Prev</a>
         <a href="{{url('agent/property-topbar/video')}}" class="button button-blue font-bold text-base mb-0">Next <i
                     class="fa fa-arrow-right ml-2"></i> </a>
+    </div>
+
+    {{-- Delete Confirmation Overlay --}}
+    <div x-show="confirmId !== null" x-cloak style="position:fixed;inset:0;z-index:9999;">
+        <div style="position:absolute;inset:0;background:rgba(0,0,0,0.5);" @click="confirmId = null"></div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+            <div style="position:relative;background:white;border-radius:12px;max-width:400px;width:90%;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,0.2);">
+                <h3 style="font-size:1.1rem;font-weight:600;margin-bottom:12px;">Delete Video</h3>
+                <p style="color:#6b7280;margin-bottom:20px;">Are you sure you want to delete this video? This action cannot be undone.</p>
+                <div style="display:flex;gap:8px;justify-content:flex-end;">
+                    <button type="button" @click="confirmId = null" class="button button-grey">Cancel</button>
+                    <button type="button" @click="$wire.doDeleteVideo(confirmId); confirmId = null" class="button button-red">Delete</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

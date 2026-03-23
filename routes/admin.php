@@ -66,10 +66,6 @@ Route::namespace('Backend')->group(function () {
 
         Route::prefix('plans')->group(function () {
             Route::get('index', [\App\Http\Controllers\Backend\PlansController::class, 'index']);
-            Route::get('status', [\App\Http\Controllers\Backend\PlansController::class, 'status']);
-            Route::get('add', [\App\Http\Controllers\Backend\PlansController::class, 'add']);
-            Route::get('add/{id}', [\App\Http\Controllers\Backend\PlansController::class, 'add']);
-            Route::get('delete/{id}', [\App\Http\Controllers\Backend\PlansController::class, 'delete']);
         });
 
     /*

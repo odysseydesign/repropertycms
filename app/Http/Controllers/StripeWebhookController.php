@@ -3,21 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agents;
-use App\Models\Plan;
+use App\Models\Backend\Admin;
 use App\Models\Subscription;
 use App\Notifications\AdminSubscriptionExpired;
 use App\Notifications\AdminSubscriptionNotification;
 use App\Notifications\AdminSubscriptionRenewed;
 use App\Notifications\AgentSubscriptionExpired;
 use App\Notifications\AgentSubscriptionRenewed;
-use Carbon\Carbon;
-use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
-use Mail;
 use Stripe\Exception\SignatureVerificationException;
-use Stripe\StripeClient;
 use Stripe\Webhook;
 
 class StripeWebhookController extends Controller
@@ -27,15 +23,14 @@ class StripeWebhookController extends Controller
      * */
     public function receiveWebhook(Request $request)
     {
-        $stripe = new \Stripe\StripeClient(config('stripe.api_keys.secret_key'));
         $endpoint_secret = config('stripe.api_keys.webhook_secret');
-        // Log the raw payload
         $payload = @file_get_contents('php://input');
         Log::info('Stripe Webhook Received:', ['payload' => $payload]);
 
         $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'] ?? null;
-        if (!$sig_header) {
+        if (! $sig_header) {
             Log::error('Stripe Webhook Error: Missing signature header');
+
             return response()->json(['error' => 'Missing Stripe signature'], 400);
         }
 
@@ -46,20 +41,15 @@ class StripeWebhookController extends Controller
             Log::info('Stripe Webhook Parsed Successfully', ['event_type' => $event->type]);
         } catch (\UnexpectedValueException $e) {
             Log::error('Stripe Webhook Error: Invalid payload', ['exception' => $e->getMessage()]);
+
             return response()->json(['error' => 'Invalid payload'], 400);
         } catch (SignatureVerificationException $e) {
             Log::error('Stripe Webhook Error: Invalid signature', ['exception' => $e->getMessage()]);
+
             return response()->json(['error' => 'Invalid signature'], 400);
         }
 
-        // Handle the event
         switch ($event->type) {
-            case 'checkout.session.completed':
-                $session = $event->data->object;
-                Log::info('Handling checkout.session.completed', ['session_id' => $session->id]);
-                $this->handleCheckoutSessionCompleted($session);
-                break;
-
             case 'customer.subscription.created':
                 $subscription = $event->data->object;
                 Log::info('Handling customer.subscription.created', ['subscription_id' => $subscription->id]);
@@ -85,8 +75,6 @@ class StripeWebhookController extends Controller
         return response()->json(['status' => 'success'], 200);
     }
 
-    protected function handleCheckoutSessionCompleted($session) {}
-
     protected function handleSubscriptionCreated($subscription)
     {
         $agent = Agents::where('customer_id', $subscription->customer)->first();
@@ -103,14 +91,14 @@ class StripeWebhookController extends Controller
                 'current_period_end' => date('Y-m-d H:i:s', $subscription->current_period_end),
             ]);
 
-            // send subscription welcome notification to agent
-
             $agent->notify(new \App\Notifications\SubscriptionWelcome($agent));
 
-            Notification::route('mail', 'email@riemailtask.com') // or use an admin model here.
-            ->notify(new AdminSubscriptionNotification($agent));
+            $adminEmail = Admin::first()?->email;
+            if ($adminEmail) {
+                Notification::route('mail', $adminEmail)
+                    ->notify(new AdminSubscriptionNotification($agent));
+            }
         }
-
     }
 
     protected function handleSubscriptionUpdated($subscription)
@@ -124,23 +112,18 @@ class StripeWebhookController extends Controller
             $sub->stripe_price = $subscription->plan->id;
             $sub->save();
 
-            if ($subscription->status === 'active') { // Check renewal
+            if ($subscription->status === 'active') {
                 $agent = Agents::where('customer_id', $subscription->customer)->first();
 
                 if ($agent) {
-                    // Get the count of published properties
                     $published_properties = $agent->totalPublishedPropertiesCount;
-
-                    // Get the active subscription credits
                     $activeSubscription = $agent->activeSubscription;
                     $activePlanCredits = $activeSubscription->plan->credits;
 
                     Log::info('Agent Subscription Check', [
                         'agent_id' => $agent->id,
                         'published_properties' => $published_properties,
-                        'activeSubscription' => $activeSubscription,
-                        'activePlanCredits' => $activePlanCredits
-
+                        'activePlanCredits' => $activePlanCredits,
                     ]);
 
                     if ($published_properties > $activePlanCredits) {
@@ -148,20 +131,24 @@ class StripeWebhookController extends Controller
 
                         Log::info('Unpublishing Properties', [
                             'agent_id' => $agent->id,
-                            'unpublishPropertiesCount' => $unpublishPropertiesCount
+                            'unpublishPropertiesCount' => $unpublishPropertiesCount,
                         ]);
 
                         if ($agent->email !== 'ra@odysseydesign.us') {
                             $agent->publishedProperties()
-                                ->orderBy('publish_date', 'desc') // Get recently published properties first
+                                ->orderBy('publish_date', 'desc')
                                 ->limit($unpublishPropertiesCount)
-                                ->update(['published' => false]); // Unpublish properties
+                                ->update(['published' => false]);
                         }
                     }
+
                     $agent->notify(new AgentSubscriptionRenewed($subscription, $agent));
 
-                    Notification::route('mail', 'email@riemailtask.com') // or use an admin model here.
-                    ->notify(new AdminSubscriptionRenewed($agent));
+                    $adminEmail = Admin::first()?->email;
+                    if ($adminEmail) {
+                        Notification::route('mail', $adminEmail)
+                            ->notify(new AdminSubscriptionRenewed($agent));
+                    }
                 }
             }
         }
@@ -169,7 +156,6 @@ class StripeWebhookController extends Controller
 
     protected function handleSubscriptionDeleted($subscription)
     {
-
         $sub = Subscription::where('stripe_id', $subscription->id)->first();
 
         if ($sub) {
@@ -179,89 +165,17 @@ class StripeWebhookController extends Controller
 
             $agent = Agents::where('customer_id', $subscription->customer)->first();
             if ($agent) {
-                $agent->notify(new AgentSubscriptionExpired($subscription)); // Assuming you have a notification for this
+                $agent->notify(new AgentSubscriptionExpired($subscription));
 
-                $publishedProperties = $agent->publishedProperties()->delete();
+                // Soft-delete all published properties instead of hard-deleting
+                $agent->publishedProperties()->each(fn ($p) => $p->delete());
 
-                Notification::route('mail', 'email@riemailtask.com') // or use an admin model here.
-                ->notify(new AgentSubscriptionExpired($agent));
+                $adminEmail = Admin::first()?->email;
+                if ($adminEmail) {
+                    Notification::route('mail', $adminEmail)
+                        ->notify(new AgentSubscriptionExpired($agent));
+                }
             }
         }
     }
-
-    private function handleSubscription($subscription)
-    {
-        try {
-            $stripe = new \Stripe\StripeClient(config('stripe.api_keys.secret_key'));
-
-            $customer = $stripe->customers->retrieve(
-                $subscription->customer,
-                []
-            );
-
-            try {
-                $agent = Agents::where('email', $customer->email)->firstOrFail();
-                $agent->customer_id = $subscription->customer;
-                $agent->save();
-
-                echo $agent->id.' updated with customer id '.$subscription->customer;
-            } catch (\Exception $ex) {
-                echo $ex->getMessage();
-
-                $splitName = explode(' ', $customer->name, 2);
-                $password = base64_encode($customer->email);
-                $agent = new Agents;
-                $agent->first_name = $splitName[0];
-                $agent->last_name = ! empty($splitName[1]) ? $splitName[1] : '';
-                $agent->email = $customer->email;
-                $agent->password = Hash::make($password);
-                $agent->customer_id = $subscription->customer;
-                $agent->save();
-
-                echo $agent->id.' created with customer id '.$subscription->customer;
-
-                // send email to new customer
-                $name = $customer->name;
-                $email = $customer->email;
-                $data = ['name' => $name, 'email' => $email, 'password' => $password];
-                $user['to'] = $email;
-                Mail::send('mail.stripe-registered', $data, function ($message) use ($user) {
-                    $message->to($user['to'])
-                        ->cc(['email@riemailtask.com'])
-                        ->subject('Welcome to Realty Interface');
-                });
-            }
-
-            $user_subscription = Subscription::updateOrCreate([
-                'subscription_id' => $subscription->id,
-            ], [
-                'agent_id' => $agent->id,
-                'customer_id' => $subscription->customer,
-                'billing' => $subscription->billing,
-                'billing_cycle_anchor' => $subscription->billing_cycle_anchor ? Carbon::createFromTimestamp($subscription->billing_cycle_anchor)->format('Y-m-d H:i:s') : null,
-                'start_date' => $subscription->start_date ? Carbon::createFromTimestamp($subscription->start_date)->format('Y-m-d H:i:s') : null,
-                'cancel_at' => $subscription->cancel_at ? Carbon::createFromTimestamp($subscription->cancel_at)->format('Y-m-d H:i:s') : null,
-                'cancel_at_period_end' => $subscription->cancel_at_period_end,
-                'canceled_at' => $subscription->canceled_at ? Carbon::createFromTimestamp($subscription->canceled_at)->format('Y-m-d H:i:s') : null,
-                'created' => $subscription->created ? Carbon::createFromTimestamp($subscription->created)->format('Y-m-d H:i:s') : null,
-                'current_period_end' => $subscription->current_period_end ? Carbon::createFromTimestamp($subscription->current_period_end)->format('Y-m-d H:i:s') : null,
-                'current_period_start' => $subscription->current_period_start ? Carbon::createFromTimestamp($subscription->current_period_start)->format('Y-m-d H:i:s') : null,
-                'ended_at' => $subscription->ended_at ? Carbon::createFromTimestamp($subscription->ended_at)->format('Y-m-d H:i:s') : null,
-                'default_payment_method' => $subscription->default_payment_method,
-                'price_id' => $subscription->plan->id,
-                'amount' => $subscription->plan->amount,
-                'interval' => $subscription->plan->interval,
-                'interval_count' => $subscription->plan->interval_count,
-                'product' => $subscription->plan->product,
-                'quantity' => $subscription->quantity,
-                'status' => $subscription->status,
-            ]);
-        } catch (\Exception $ex) {
-            echo $ex->getMessage();
-        }
-    }
-
-    private function handleInvoice($invoice) {}
-
-    private function handleSubscriptionSchedule($subscriptionSchedule) {}
 }

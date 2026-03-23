@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Agent;
 
 use App\Http\Controllers\Controller;
-use App\Models\credit_logs;
 use App\Models\Payments;
 use App\Models\Plan;
 use Illuminate\Http\Request;
@@ -44,17 +43,6 @@ class PaymentsController extends Controller
     public function paymentError(Request $request)
     {
         return view('agent.agents.payment_error');
-    }
-
-    public function SuccessPage($id)
-    {
-        $credit_logs = credit_logs::where('id', '=', $id)->first();
-        if (! is_null($credit_logs)) {
-            return view('agent.agents.success_page')->with(['credits' => $credit_logs->credits]);
-        } else {
-            return view('agent.agents.dashboard');
-        }
-
     }
 
     public function payment(Request $request)

@@ -3,11 +3,14 @@
 namespace App\Livewire\Agent\Profile;
 
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use WireElements\Pro\Components\Modal\Modal;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
-class EditDetails extends Modal
+class EditDetails extends Component
 {
     use LivewireAlert;
+
+    public bool $show = false;
 
     public $agent;
 
@@ -16,6 +19,17 @@ class EditDetails extends Modal
     public $last_name;
 
     public $email;
+
+    #[On('open-edit-details')]
+    public function openModal(): void
+    {
+        $this->show = true;
+    }
+
+    public function closeModal(): void
+    {
+        $this->show = false;
+    }
 
     public function save()
     {
@@ -28,7 +42,7 @@ class EditDetails extends Modal
             'toast' => true,
         ]);
         $this->dispatch('refresh');
-        $this->close();
+        $this->show = false;
     }
 
     public function mount()

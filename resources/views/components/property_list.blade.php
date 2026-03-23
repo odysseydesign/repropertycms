@@ -4,7 +4,7 @@
 @php
 $color = '#0069a6';
 @endphp
-<div class="container mb-5">
+<div class="container mb-5" x-data="{ confirmDeleteId: null }">
     <div class="d-flex align-items-center mb-3">
         <p class="ml-4 font-bold text-lg" style="color: #4b4b4b">
             <i class="fa fa-home mr-2" style="color: grey"></i> Properties
@@ -37,7 +37,7 @@ $color = '#0069a6';
                             <button wire:click="publishProperty({{ $row->id }})" class="ml-10 text-lg mt-2" style="color: {{ $color }};">
                                 Publish Property
                             </button><br>
-                            <button wire:click="deleteProperty({{ $row->id }})" class="ml-10 text-lg mt-3 mb-4" style="color: {{ $color }};">
+                            <button type="button" @click="confirmDeleteId = {{ $row->id }}" class="ml-10 text-lg mt-3 mb-4" style="color: {{ $color }};">
                                 Delete Property
                             </button><br>
                         @endif
@@ -59,74 +59,34 @@ $color = '#0069a6';
             <p class="text-center">No Properties Found.</p>
         @endif
     </div>
+
+    {{-- Delete Confirmation Overlay --}}
+    <div x-show="confirmDeleteId !== null" x-cloak style="position:fixed;inset:0;z-index:9999;">
+        <div style="position:absolute;inset:0;background:rgba(0,0,0,0.5);" @click="confirmDeleteId = null"></div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+            <div style="position:relative;background:white;border-radius:12px;max-width:400px;width:90%;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,0.2);">
+                <h3 style="font-size:1.1rem;font-weight:600;margin-bottom:12px;">Delete Property</h3>
+                <p style="color:#6b7280;margin-bottom:20px;">Are you sure you want to delete this property? This action cannot be undone.</p>
+                <div style="display:flex;gap:8px;justify-content:flex-end;">
+                    <button type="button" @click="confirmDeleteId = null" class="button button-grey">Cancel</button>
+                    <button type="button" @click="$wire.doDeleteProperty(confirmDeleteId); confirmDeleteId = null" class="button button-red">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Publish Confirmation Overlay (triggered from PHP via confirmPublishId) --}}
+    <div x-show="$wire.confirmPublishId !== null" x-cloak style="position:fixed;inset:0;z-index:9999;">
+        <div style="position:absolute;inset:0;background:rgba(0,0,0,0.5);" @click="$wire.cancelConfirmPublish()"></div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+            <div style="position:relative;background:white;border-radius:12px;max-width:400px;width:90%;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,0.2);">
+                <h3 style="font-size:1.1rem;font-weight:600;margin-bottom:12px;">Publish Property</h3>
+                <p style="color:#6b7280;margin-bottom:20px;">Are you sure you want to publish this property? It will be visible to the public.</p>
+                <div style="display:flex;gap:8px;justify-content:flex-end;">
+                    <button type="button" @click="$wire.cancelConfirmPublish()" class="button button-grey">Cancel</button>
+                    <button type="button" @click="$wire.doPublishProperty()" class="button button-green">Publish</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-{{--<div class="table-responsive">--}}
-{{--    <table class="table w-full table-striped table-auto mb-5">--}}
-{{--        <thead>--}}
-{{--        <tr>--}}
-{{--            <th>Property Name</th>--}}
-{{--            <th>City, State</th>--}}
-{{--            <th class="text-center">Price</th>--}}
-{{--            <th class="text-center">Count Of Images</th>--}}
-{{--            <th class="text-center">Count Of Floor Plans</th>--}}
-{{--            <th class="text-center">Views</th>--}}
-{{--            <th class="text-center">Created</th>--}}
-{{--            <th class="text-center">Published</th>--}}
-{{--            <th class="text-center">Actions</th>--}}
-{{--        </tr>--}}
-{{--        </thead>--}}
-{{--        @if ($property->count() > 0)--}}
-{{--            @foreach( $property as $row)--}}
-{{--                <tr>--}}
-{{--                    <td>{{$row->name}}</td>--}}
-{{--                    <td>{{ $row->city }}, {{ $row->state?->name }}</td>--}}
-{{--                    <td class="text-right">{{$row->price}}</td>--}}
-{{--                    <td class="text-center">{{$row->property_images->count()}}</td>--}}
-{{--                    <td class="text-center">{{$row->property_floorplans->count()}}</td>--}}
-{{--                    <td class="text-center">{{$row->views}}</td>--}}
-{{--                    <td class="text-center">{{ $row->created_at->format('d M Y') }}</td>--}}
-{{--                    <td class="text-center">--}}
-{{--                        {{($row->published == 1) ? "Yes" : "No"}}--}}
-{{--                    </td>--}}
-{{--                    <td>--}}
-{{--                        <div class="d-flex align-items-center">--}}
-{{--                            <a href="{{url('agent/property/address/' . $row['id'])}}"--}}
-{{--                               class="button button-blue button-sm my-1" title="Edit Property">--}}
-{{--                                <i class="fa fa-pencil mr-1"></i>--}}
-{{--                            </a>--}}
-{{--                            @if(!$row->published)--}}
-{{--                                <a href="{{url($row['unique_url'])}}" target="_blank"--}}
-{{--                                   class="button button-blue button-sm my-1" title="Property Preview">--}}
-{{--                                    <i class="fa fa-eye mr-1"></i>--}}
-{{--                                </a>--}}
-
-{{--                                <button wire:click="publishProperty({{ $row->id }})"--}}
-{{--                                        class="button button-blue button-sm my-1" title="Publish Property">--}}
-{{--                                    <i class="fa fa-upload mr-1"></i>--}}
-{{--                                </button>--}}
-{{--                            @else--}}
-{{--                                <a target="_blank" href="{{url($row->unique_url)}}"--}}
-{{--                                   class="button button-blue button-sm my-1" title="Property Example">--}}
-{{--                                    <i class="fa fa-globe mr-1"></i>--}}
-{{--                                </a>--}}
-{{--                            @endif--}}
-{{--                            <button wire:click="deleteProperty({{ $row->id }})"--}}
-{{--                                    class="button button-blue button-sm my-1" title="Delete Property">--}}
-{{--                                <i class="fa fa-times mr-1"></i>--}}
-{{--                            </button>--}}
-{{--                            <a href="https://realtyinterface.com/learn" target="_blank"--}}
-{{--                               class="button button-blue button-sm my-1" title="Build Website Tutorial">--}}
-{{--                                <i class="fa fa-external-link mr-1"></i>--}}
-{{--                            </a>--}}
-{{--                        </div>--}}
-{{--                    </td>--}}
-{{--                </tr>--}}
-{{--            @endforeach--}}
-{{--        @else--}}
-{{--            <tr>--}}
-{{--                <td colspan="9">No Properties Found.</td>--}}
-{{--            </tr>--}}
-{{--        @endif--}}
-{{--    </table>--}}
-{{--</div>--}}

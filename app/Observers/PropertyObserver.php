@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Models\Backend\Admin;
 use App\Models\Properties;
 use App\Notifications\PropertyCreated;
 use Illuminate\Support\Facades\Notification;
@@ -30,9 +31,11 @@ class PropertyObserver
         ];
         try {
 
-            // Send notification to admin (replace with your admin model/retrieval)
-            Notification::route('mail', 'email@riemailtask.com')
-                ->notify(new PropertyCreated($data));
+            $adminEmail = Admin::first()?->email;
+            if ($adminEmail) {
+                Notification::route('mail', $adminEmail)
+                    ->notify(new PropertyCreated($data));
+            }
         } catch (\Exception $ex) {
             Log::error($ex->getMessage());
         }

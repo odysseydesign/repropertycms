@@ -3,7 +3,7 @@
     <div class="w-full">
         <div class="d-flex align-items-center justify-content-between my-4 flex-wrap page-heading">
             <h5 class="mb-0">Property Amenities</h5>
-            <a href="#" onclick="Livewire.dispatch('modal.open', {component: 'add-new-amenity'})" class="btn-blue m-0">
+            <a href="#" onclick="Livewire.dispatch('open-add-new-amenity')" class="btn-blue m-0">
                 <i class="fa fa-plus mr-1"></i> Add New Amenity
             </a>
         </div>

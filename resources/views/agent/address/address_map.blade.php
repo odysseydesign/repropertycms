@@ -4,6 +4,7 @@
 
 @section('content')
     @livewire('map.index', ['property' => $property])
+    @livewire('map.update-map')
 @stop
 
 @push('scripts')

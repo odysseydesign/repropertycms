@@ -2,17 +2,33 @@
 
 namespace App\Livewire;
 
-use WireElements\Pro\Components\Modal\Modal;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
-class AddNewAmenity extends Modal
+class AddNewAmenity extends Component
 {
+    public bool $show = false;
+
     public $add_amenity;
+
+    #[On('open-add-new-amenity')]
+    public function openModal(): void
+    {
+        $this->show = true;
+    }
+
+    public function closeModal(): void
+    {
+        $this->show = false;
+        $this->reset('add_amenity');
+    }
 
     public function save()
     {
         $this->dispatch('add_new_amenity', value: $this->add_amenity);
 
-        $this->close();
+        $this->show = false;
+        $this->reset('add_amenity');
     }
 
     public function render()

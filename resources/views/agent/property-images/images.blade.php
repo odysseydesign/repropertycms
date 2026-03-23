@@ -4,4 +4,5 @@
 
 @section('content')
     @livewire('photo-library.index', ['property' => $property])
+    @livewire('photo-library.add-new-image')
 @stop

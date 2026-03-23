@@ -39,7 +39,11 @@ class EnvService
 
         file_put_contents($envPath, $envContent);
 
-        // Clear cached config after updating env
-        Artisan::call('config:clear');
+        // On production, re-cache everything; on local just clear the cache
+        if (app()->isProduction()) {
+            Artisan::call('optimize');
+        } else {
+            Artisan::call('config:clear');
+        }
     }
 }

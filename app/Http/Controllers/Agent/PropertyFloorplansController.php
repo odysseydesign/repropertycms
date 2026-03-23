@@ -47,6 +47,20 @@ class PropertyFloorplansController extends Controller
                 }
             } else {
                 if ($property_id == $request->property_id) {
+                    // Validate file upload
+                    $request->validate([
+                        'file' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:20480',
+                    ]);
+
+                    // Deep MIME type verification
+                    $finfo    = finfo_open(FILEINFO_MIME_TYPE);
+                    $mimeType = finfo_file($finfo, $request->file->getRealPath());
+                    finfo_close($finfo);
+
+                    if (!in_array($mimeType, ['image/jpeg', 'image/png', 'image/gif', 'image/webp'])) {
+                        return response()->json(['success' => 0, 'message' => 'Invalid file type detected. Only image files are allowed.']);
+                    }
+
                     // Upload image on S3
                     //                    $path = uploadS3Image('property_floorplans', $request->file);
                     $path = uploadS3ImageThumb('property_floorplans', $request->file, env('FLOORPLAN_WIDTH'));

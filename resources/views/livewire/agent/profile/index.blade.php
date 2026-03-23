@@ -1,4 +1,4 @@
-<div class="w-full py-5">
+<div class="w-full py-5" x-data="{ confirmAction: null }">
     <div class="pb-5">
         <div class="d-flex align-items-center justify-content-between flex-wrap page-heading">
             <h3 class="mb-0">Create your Profile</h3>
@@ -17,18 +17,18 @@
                                 <div class="w-full">
                                     <img src="{{ asset_s3($agent->profile_image) }}" class="profile-image"/>
                                     <a href="#"
-                                       onclick="Livewire.dispatch('modal.open', {component: 'agent.profile.add-profile-image' })"
+                                       onclick="Livewire.dispatch('open-add-profile-image')"
                                        style="font-size: 16px; color: #3a3a3a">
                                         <i class="fa fa-pencil mr-1"></i>
                                     </a>
-                                    <a href="#" wire:click="deleteProfileImage" disable id="addvideos"
+                                    <a href="#" @click.prevent="confirmAction = 'profile'" disable id="addvideos"
                                        class="" style="font-size: 14px;color:red" data-ripple-light="true"><i
                                                 class="fa fa-trash mr-2"></i></a>
                                 </div>
                             </div>
                         @else
                             <a href="#"
-                               onclick="Livewire.dispatch('modal.open', {component: 'agent.profile.add-profile-image' })"
+                               onclick="Livewire.dispatch('open-add-profile-image')"
                                class="button button-logo-green">
                                 <i class="fa fa-plus mr-1"></i> Add Profile Image
                             </a>
@@ -55,18 +55,18 @@
                             <div class="w-full">
                                 <img src="{{ asset_s3($agent->logo_image) }}" class="profile-image mb-2"/>
                                 <a href="#"
-                                   onclick="Livewire.dispatch('modal.open', {component: 'agent.profile.add-logo-image' })"
+                                   onclick="Livewire.dispatch('open-add-logo-image')"
                                    style="font-size: 16px; color: #3a3a3a">
                                     <i class="fa fa-pencil mr-1"></i>
                                 </a>
-                                <a href="#" wire:click="deleteLogoImage" disable id="addvideos"
+                                <a href="#" @click.prevent="confirmAction = 'logo'" disable id="addvideos"
                                    class="" style="font-size: 14px;color:red"  data-ripple-light="true"><i
                                             class="fa fa-trash mr-2"></i></a>
                             </div>
                         </div>
                     @else
                         <a href="#"
-                           onclick="Livewire.dispatch('modal.open', {component: 'agent.profile.add-logo-image' })"
+                           onclick="Livewire.dispatch('open-add-logo-image')"
                            class="button button-logo-green">
                             <i class="fa fa-plus mr-1"></i> Add Logo Image
                         </a>
@@ -86,13 +86,13 @@
                 <p style="font-size: large"><b>Email: </b> {{$agent->email}}</p>
                 <div class="text-left inline-block">
                     <a href="#"
-                       onclick="Livewire.dispatch('modal.open', {component: 'agent.profile.edit-details' })"
+                       onclick="Livewire.dispatch('open-edit-details')"
                        class="button button-logo-green  mt-2">
                         <i class="fa fa-pencil mr-1"></i> Edit Details
                     </a>
                 </div>
                 <div class="mt-5 block">
-                    <a onclick="Livewire.dispatch('modal.open', {component: 'agent.profile.change-password' })"
+                    <a onclick="Livewire.dispatch('open-change-password')"
                        class="button button-secondary mb-0" data-ripple-light="true"> <i
                                 class="fa fa-pencil mr-2" style="font-size: 14px"></i>Change Password</a>
                 </div>
@@ -118,7 +118,7 @@
                 @endif
 
                 <div class="text-left inline-block">
-                    <a onclick="Livewire.dispatch('modal.open', {component: 'agent.profile.edit-address' })"
+                    <a onclick="Livewire.dispatch('open-edit-address')"
                        class="button button-logo-green mb-0" data-ripple-light="true"><i class="fa fa-pencil mr-2"></i> Edit
                         Address</a>
                 </div>
@@ -152,13 +152,30 @@
                 @endif
 
                 <div class="text-left inline-block">
-                    <a onclick="Livewire.dispatch('modal.open', {component: 'agent.profile.edit-social-media' })"
+                    <a onclick="Livewire.dispatch('open-edit-social-media')"
                        class="button button-logo-green mb-0" data-ripple-light="true"> <i
                                 class="fa fa-pencil mr-2"></i>Edit Social Media</a>
                 </div>
                 <!-- end code for social media section  -->
             </div>
             <!-- end code for address section  -->
+        </div>
+    </div>
+
+    {{-- Delete Confirmation Overlay --}}
+    <div x-show="confirmAction !== null" x-cloak style="position:fixed;inset:0;z-index:9999;">
+        <div style="position:absolute;inset:0;background:rgba(0,0,0,0.5);" @click="confirmAction = null"></div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+            <div style="position:relative;background:white;border-radius:12px;max-width:400px;width:90%;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,0.2);">
+                <h3 style="font-size:1.1rem;font-weight:600;margin-bottom:12px;" x-text="confirmAction === 'profile' ? 'Delete Profile Image' : 'Delete Logo Image'"></h3>
+                <p style="color:#6b7280;margin-bottom:20px;">Are you sure you want to delete this image? This action cannot be undone.</p>
+                <div style="display:flex;gap:8px;justify-content:flex-end;">
+                    <button type="button" @click="confirmAction = null" class="button button-grey">Cancel</button>
+                    <button type="button"
+                            @click="confirmAction === 'profile' ? $wire.doDeleteProfileImage() : $wire.doDeleteLogoImage(); confirmAction = null"
+                            class="button button-red">Delete</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

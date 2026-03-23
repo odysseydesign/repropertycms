@@ -5,17 +5,34 @@ namespace App\Livewire\Video;
 use App\Models\Properties;
 use App\Models\Property_videos;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use WireElements\Pro\Components\Modal\Modal;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
-class View extends Modal
+class View extends Component
 {
     use LivewireAlert;
+
+    public bool $show = false;
 
     public $property;
 
     public $property_video;
 
     public $display_on = 'both';
+
+    #[On('open-video-view')]
+    public function openModal(int $propertyId, int $videoId): void
+    {
+        $this->property = Properties::find($propertyId);
+        $this->property_video = Property_videos::find($videoId);
+        $this->display_on = $this->getInitialDisplayOnValue();
+        $this->show = true;
+    }
+
+    public function closeModal(): void
+    {
+        $this->show = false;
+    }
 
     public function updatedDisplayOn($value)
     {
@@ -53,13 +70,6 @@ class View extends Modal
         $this->dispatch('refresh');
     }
 
-    public function mount(Properties $property, Property_videos $property_video)
-    {
-        $this->property = $property;
-        $this->property_video = $property_video;
-        $this->display_on = $this->getInitialDisplayOnValue();
-    }
-
     public function render()
     {
         return view('livewire.video.view');
@@ -67,6 +77,9 @@ class View extends Modal
 
     private function getInitialDisplayOnValue(): string
     {
+        if (! $this->property_video) {
+            return 'both';
+        }
         if ($this->property_video->featured && $this->property_video->main_video) {
             return 'both';
         } elseif ($this->property_video->main_video) {

@@ -530,7 +530,7 @@
                                                                                 <td valign="top" align="center">
                                                                                     <div class="pc-font-alt" style="text-decoration: none;">
                                                                                         <div style="font-size: 14px;line-height: 20px;text-align:center;text-align-last:center;color:#d8d8d8;letter-spacing:-0.2px;font-weight:400;font-style:normal;font-variant-ligatures:normal;">
-                                                                                            <div><span style="font-family: 'Fira Sans', Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; text-decoration: none; text-transform: none;">Gig Harbor, Washington</span>
+                                                                                            <div><span style="font-family: 'Fira Sans', Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; text-decoration: none; text-transform: none;">{{ config('app.address') }}</span>
                                                                                                 <br><span style="font-family: 'Fira Sans', Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; text-decoration: none; text-transform: none;">{{ config('app.name') }} ©{{ date('Y') }}</span>
                                                                                             </div>
                                                                                         </div>

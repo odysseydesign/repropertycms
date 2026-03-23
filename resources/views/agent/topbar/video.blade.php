@@ -4,4 +4,6 @@
 
 @section('content')
     @livewire('agent.topbar.video', ['property' => $property])
+    @livewire('video.add')
+    @livewire('video.view')
 @endsection

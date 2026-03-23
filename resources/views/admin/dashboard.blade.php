@@ -24,7 +24,7 @@
                         <tr id="agent_data{{ $row->id }}">
                             <td>{{$row->first_name}} {{$row->last_name}}</td>
                             <td>{{$row->email}}</td>
-                            <td>{{$row->created_at->format('d M Y')}}</td>
+                            <td>{{$row->created_at?->format('d M Y')}}</td>
                             <td class="text-center">
                                 @if($row->active == 1)
                                     <a href="#" class="save_status button button-green button-sm" id="{{ $row->id }}">ENABLE</a>

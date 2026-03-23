@@ -4,10 +4,13 @@ namespace App\Livewire\Map;
 
 use App\Models\Properties;
 use App\Models\States;
-use WireElements\Pro\Components\Modal\Modal;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
-class UpdateMap extends Modal
+class UpdateMap extends Component
 {
+    public bool $show = false;
+
     public $property;
 
     public $address_line_1;
@@ -24,6 +27,26 @@ class UpdateMap extends Modal
 
     public $states;
 
+    #[On('open-update-map')]
+    public function openModal(int $propertyId): void
+    {
+        $this->property = Properties::find($propertyId);
+        $this->states = States::pluck('name', 'state_id')->toArray();
+
+        $this->address_line_1 = $this->property->address_line_1;
+        $this->address_line_2 = $this->property->address_line_2;
+        $this->city = $this->property->city;
+        $this->state = $this->property->state_id;
+        $this->zip = $this->property->zip;
+        $this->country = $this->property->country->name ?? 'United States';
+        $this->show = true;
+    }
+
+    public function closeModal(): void
+    {
+        $this->show = false;
+    }
+
     public function save()
     {
         $this->property->update([
@@ -38,20 +61,7 @@ class UpdateMap extends Modal
 
         $this->dispatch('mapUpdated');
 
-        $this->close();
-    }
-
-    public function mount(Properties $property)
-    {
-        $this->property = $property;
-        $this->states = States::pluck('name', 'state_id')->toArray();
-
-        $this->address_line_1 = $this->property->address_line_1;
-        $this->address_line_2 = $this->property->address_line_2;
-        $this->city = $this->property->city;
-        $this->state = $this->property->state_id;
-        $this->zip = $this->property->zip;
-        $this->country = $this->property->country->name ?? 'United States';
+        $this->show = false;
     }
 
     public function render()

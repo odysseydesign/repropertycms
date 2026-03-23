@@ -24,15 +24,39 @@ class PropertyDocumentsController extends Controller
 
     public function saveDocs(Request $request)
     {
+        // Validate file upload
+        $request->validate([
+            'file' => 'required|file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,txt|max:10240'
+        ]);
+
+        // Additional MIME type verification
+        if (!$this->validateMimeType($request->file, [
+            'application/pdf',
+            'application/msword',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'application/vnd.ms-excel',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'application/vnd.ms-powerpoint',
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+            'text/plain'
+        ])) {
+            return response()->json([
+                'success' => 0,
+                'message' => 'Invalid file type detected. Only document files are allowed.'
+            ]);
+        }
+
         $property = session('property');
         if (! is_null($property)) {
             $data = [];
             $property_id = $property['id'];
             if ($request->file('file')) {
 
+                // Sanitize filename
+                $originalFileName = $this->sanitizeFilename($request->file->getClientOriginalName());
+
                 // Upload image on S3
                 $path = uploadS3Image('property_documents', $request->file);
-                $originalFileName = $request->file->getClientOriginalName();
 
                 $property_documents = new PropertyDocuments;
                 $property_documents->property_id = $property_id;
@@ -129,5 +153,39 @@ class PropertyDocumentsController extends Controller
 
             return response()->json($data);
         }
+    }
+
+    /**
+     * Validate file MIME type to prevent spoofing
+     */
+    private function validateMimeType($file, array $allowedMimeTypes): bool
+    {
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mimeType = finfo_file($finfo, $file->getRealPath());
+        finfo_close($finfo);
+
+        return in_array($mimeType, $allowedMimeTypes);
+    }
+
+    /**
+     * Sanitize filename to prevent path traversal and other attacks
+     */
+    private function sanitizeFilename(string $filename): string
+    {
+        // Remove path traversal attempts
+        $filename = basename($filename);
+
+        // Remove potentially dangerous characters
+        $filename = preg_replace('/[^a-zA-Z0-9\._-]/', '_', $filename);
+
+        // Ensure filename is not too long
+        if (strlen($filename) > 255) {
+            $extension = pathinfo($filename, PATHINFO_EXTENSION);
+            $name = pathinfo($filename, PATHINFO_FILENAME);
+            $name = substr($name, 0, 250 - strlen($extension));
+            $filename = $name . '.' . $extension;
+        }
+
+        return $filename;
     }
 }

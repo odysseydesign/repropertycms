@@ -18,4 +18,5 @@
     <div class="w-full rounded">
         @livewire('amenity.index', ['property' => $property])
     </div>
+    @livewire('add-new-amenity')
 @stop

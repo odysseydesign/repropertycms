@@ -135,9 +135,9 @@ class SettingsController extends Controller
             ->value('is_setup') ?? false;
 
         $current = [
-            'key'         => config('services.stripe.key', ''),
-            'webhook_set' => !empty(config('services.stripe.webhook_secret')),
-            'secret_set'  => !empty(config('services.stripe.secret')),
+            'key'         => config('stripe.api_keys.publish_key', ''),
+            'webhook_set' => !empty(config('stripe.api_keys.webhook_secret')),
+            'secret_set'  => !empty(config('stripe.api_keys.secret_key')),
         ];
 
         return view('admin.settings.stripe', compact('current', 'isConfigured'));
@@ -149,10 +149,10 @@ class SettingsController extends Controller
             'stripe_key' => 'required|string',
         ]);
 
-        $data = ['STRIPE_KEY' => $request->stripe_key];
+        $data = ['STRIPE_PUBLIC_KEY' => $request->stripe_key];
 
         if ($request->filled('stripe_secret')) {
-            $data['STRIPE_SECRET'] = $request->stripe_secret;
+            $data['STRIPE_SECRET_KEY'] = $request->stripe_secret;
         }
 
         if ($request->filled('stripe_webhook')) {
@@ -378,7 +378,7 @@ class SettingsController extends Controller
                 if (!is_dir($dir)) {
                     mkdir($dir, 0755, true);
                 }
-                $ext = $request->file($field)->getClientOriginalExtension();
+                $ext = $request->file($field)->guessExtension();
                 $request->file($field)->move($dir, $field . '.' . $ext);
                 $data[$field . '_path'] = 'images/brand/' . $field . '.' . $ext;
             }

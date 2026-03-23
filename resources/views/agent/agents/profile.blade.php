@@ -1,4 +1,10 @@
 @extends('layouts.agents.default1')
 @section('content')
     @livewire('agent.profile.index')
+    @livewire('agent.profile.edit-details')
+    @livewire('agent.profile.add-profile-image')
+    @livewire('agent.profile.add-logo-image')
+    @livewire('agent.profile.change-password')
+    @livewire('agent.profile.edit-address')
+    @livewire('agent.profile.edit-social-media')
 @stop

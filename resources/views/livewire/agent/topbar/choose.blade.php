@@ -2,7 +2,7 @@
     <div class="d-flex align-items-center justify-content-between my-4 flex-wrap page-heading">
         <h5 class="mb-0">Image Header</h5>
         <a href="#"
-           onclick="Livewire.dispatch('modal.open', {component: 'agent.topbar.image', arguments: { 'property': {{ $property->id }} } })"
+           onclick="Livewire.dispatch('open-topbar-image', { propertyId: {{ $property->id }} })"
            class="btn-blue m-0">
             <i class="fa fa-plus mr-1"></i> Add Banner Image
         </a>
@@ -42,7 +42,7 @@
         @else
             <p class="text-center mt-5">You've no Image set as Cover. Please set one from here. <a
                         class="button button-outlined button-amber m-0" href="#"
-                        onclick="Livewire.dispatch('modal.open', {component: 'agent.topbar.image', arguments: { 'property': {{ $property->id }} } })">Select
+                        onclick="Livewire.dispatch('open-topbar-image', { propertyId: {{ $property->id }} })">Select
                     Image</a></p>
         @endif
     </div>

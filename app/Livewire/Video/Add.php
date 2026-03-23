@@ -10,13 +10,16 @@ use BenSampo\Embed\Services\Vimeo;
 use BenSampo\Embed\Services\YouTube;
 use Illuminate\Http\UploadedFile;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\On;
+use Livewire\Component;
 use Livewire\WithFileUploads;
-use WireElements\Pro\Components\Modal\Modal;
 
-class Add extends Modal
+class Add extends Component
 {
     use LivewireAlert;
     use WithFileUploads;
+
+    public bool $show = false;
 
     public $property;
 
@@ -27,6 +30,20 @@ class Add extends Modal
     public $video_type;
 
     public $videos;
+
+    #[On('open-video-add')]
+    public function openModal(int $propertyId): void
+    {
+        $this->property = Properties::find($propertyId);
+        $this->show = true;
+    }
+
+    public function closeModal(): void
+    {
+        $this->show = false;
+        $this->reset(['video_url', 'videos', 'showUploadOption']);
+        $this->showUploadOption = 'Youtube';
+    }
 
     public function save()
     {
@@ -51,16 +68,29 @@ class Add extends Modal
             ]);
             $this->video_type = VideoType::Vimeo;
         } else {
-
-            //            $this->validate([
-            //                'videos' => 'required|mimes:mp4,mov,ogg,jpg',
-            //            ]);
+            // Validate video files server-side
+            $this->validate([
+                'videos.*' => 'required|file|mimes:mp4,mov,avi,wmv,flv,webm|max:102400', // 100MB max
+            ]);
 
             foreach ($this->videos as $video) {
+                // Additional MIME type verification
+                if (!$this->validateMimeType($video, [
+                    'video/mp4',
+                    'video/quicktime',
+                    'video/x-msvideo',
+                    'video/x-ms-wmv',
+                    'video/x-flv',
+                    'video/webm'
+                ])) {
+                    $this->alert('error', 'Invalid file type detected. Only video files are allowed.');
+                    return;
+                }
+
                 $laravelFile = new UploadedFile(
                     $video['path'],
                     $video['name'],
-                    $video['type'] ?? 'image/jpeg',
+                    $video['type'] ?? 'video/mp4',
                     null,
                     true
                 );
@@ -82,16 +112,25 @@ class Add extends Modal
         $this->alert('success', 'Property Video added successfully.');
 
         $this->dispatch('refresh');
-        $this->close();
-    }
-
-    public function mount(Properties $property)
-    {
-        $this->property = $property;
+        $this->show = false;
+        $this->reset(['video_url', 'videos', 'showUploadOption']);
+        $this->showUploadOption = 'Youtube';
     }
 
     public function render()
     {
         return view('livewire.video.add');
+    }
+
+    /**
+     * Validate file MIME type to prevent spoofing
+     */
+    private function validateMimeType($file, array $allowedMimeTypes): bool
+    {
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mimeType = finfo_file($finfo, $file['path']);
+        finfo_close($finfo);
+
+        return in_array($mimeType, $allowedMimeTypes);
     }
 }

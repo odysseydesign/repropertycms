@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Agent;
 
 use App\Http\Controllers\Controller;
 use App\Models\Agents;
+use App\Models\Backend\Admin;
 use App\Models\Amenities;
 use App\Models\credit_logs;
 use App\Models\Properties;
@@ -258,8 +259,11 @@ class PropertyController extends Controller
             'agent' => $agent,
         ];
 
-        Notification::route('mail', 'email@riemailtask.com') // Or use a config variable
-            ->notify(new PropertyPublished($data));
+        $adminEmail = Admin::first()?->email;
+        if ($adminEmail) {
+            Notification::route('mail', $adminEmail)
+                ->notify(new PropertyPublished($data));
+        }
     }
 
     // Extract property address formatting logic to a separate method
@@ -487,10 +491,6 @@ class PropertyController extends Controller
         session()->put('agent', auth()->user());
         $agent = session('agent');
 
-        info('storeAddress after');
-        info(session()->has('agent'));
-        info($agent);
-        
         $validator = Validator::make($request->all(), [
             'address_line_1' => 'required',
         ]);

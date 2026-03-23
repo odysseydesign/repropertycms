@@ -5,19 +5,34 @@ namespace App\Livewire\Agent\Profile;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use WireElements\Pro\Components\Modal\Modal;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
-class ChangePassword extends Modal
+class ChangePassword extends Component
 {
     use LivewireAlert;
 
-    public $agent; // Add this property
+    public bool $show = false;
+
+    public $agent;
 
     public $old_password;
 
     public $password;
 
     public $password_confirmation;
+
+    #[On('open-change-password')]
+    public function openModal(): void
+    {
+        $this->show = true;
+    }
+
+    public function closeModal(): void
+    {
+        $this->show = false;
+        $this->reset(['old_password', 'password', 'password_confirmation']);
+    }
 
     public function save()
     {
@@ -38,13 +53,14 @@ class ChangePassword extends Modal
             ]);
 
             $this->dispatch('refresh');
-            $this->close();
+            $this->show = false;
+            $this->reset(['old_password', 'password', 'password_confirmation']);
         }
     }
 
     public function mount()
     {
-        $this->agent = auth()->user(); // Initialize with the currently logged-in agent
+        $this->agent = auth()->user();
     }
 
     public function render()

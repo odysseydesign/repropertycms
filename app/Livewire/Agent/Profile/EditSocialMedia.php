@@ -3,11 +3,14 @@
 namespace App\Livewire\Agent\Profile;
 
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use WireElements\Pro\Components\Modal\Modal;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
-class EditSocialMedia extends Modal
+class EditSocialMedia extends Component
 {
     use LivewireAlert;
+
+    public bool $show = false;
 
     public $agent;
 
@@ -19,6 +22,17 @@ class EditSocialMedia extends Modal
 
     public $linkedin_profile;
 
+    #[On('open-edit-social-media')]
+    public function openModal(): void
+    {
+        $this->show = true;
+    }
+
+    public function closeModal(): void
+    {
+        $this->show = false;
+    }
+
     public function save()
     {
         $this->agent->update([
@@ -29,7 +43,7 @@ class EditSocialMedia extends Modal
         ]);
         $this->alert('success', 'Social media links updated!');
         $this->dispatch('refresh');
-        $this->close();
+        $this->show = false;
     }
 
     public function mount()

@@ -2,19 +2,35 @@
 
 namespace App\Livewire\Agent\Topbar;
 
+use App\Livewire\Agent\Topbar\Choose;
 use App\Models\Properties;
 use App\Models\Property_images;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use WireElements\Pro\Components\Modal\Modal;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 #[On('refresh')]
-class Image extends Modal
+class Image extends Component
 {
     use LivewireAlert;
+
+    public bool $show = false;
 
     public $property_images;
 
     public $property;
+
+    #[On('open-topbar-image')]
+    public function openModal(int $propertyId): void
+    {
+        $this->property = Properties::find($propertyId);
+        $this->show = true;
+    }
+
+    public function closeModal(): void
+    {
+        $this->show = false;
+    }
 
     public function saveFeatureImage($image_id)
     {
@@ -22,17 +38,14 @@ class Image extends Modal
         $this->alert('success', 'Feature Image Successfully Selected!');
         $this->dispatch('refresh');
         $this->dispatch('refresh')->to(Choose::class);
-        $this->close();
-    }
-
-    public function mount(Properties $property)
-    {
-        $this->property = $property;
+        $this->show = false;
     }
 
     public function render()
     {
-        $this->property_images = Property_images::where('property_id', $this->property->id)->get();
+        if ($this->property) {
+            $this->property_images = Property_images::where('property_id', $this->property->id)->get();
+        }
 
         return view('livewire.agent.topbar.image');
     }

@@ -26,8 +26,6 @@
 @include('admin.includes.footer')
 <!-- admin dashboard foot -->
 @include('admin.includes.foot')
-<script src="{{ asset('vendor/wire-elements-pro/js/overlay-component.js') }}"></script>
-@livewire('modal-pro')
 @livewireScripts
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <x-livewire-alert::scripts/>

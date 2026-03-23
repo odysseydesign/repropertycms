@@ -6,11 +6,14 @@ use App\Models\Agent_addresses;
 use App\Models\Countries;
 use App\Models\States;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use WireElements\Pro\Components\Modal\Modal;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
-class EditAddress extends Modal
+class EditAddress extends Component
 {
     use LivewireAlert;
+
+    public bool $show = false;
 
     public $agent;
 
@@ -33,6 +36,17 @@ class EditAddress extends Modal
     public $country_id;
 
     public $phone;
+
+    #[On('open-edit-address')]
+    public function openModal(): void
+    {
+        $this->show = true;
+    }
+
+    public function closeModal(): void
+    {
+        $this->show = false;
+    }
 
     public function save()
     {
@@ -60,12 +74,12 @@ class EditAddress extends Modal
         ]);
 
         $this->dispatch('refresh'); // Refresh the parent component
-        $this->close();
+        $this->show = false;
     }
 
     public function mount()
     {
-        $this->agent = auth()->user(); // Initialize with the currently logged-in agent
+        $this->agent = auth()->user();
         $this->agent_address = $this->agent->agent_address;
         $this->states = States::pluck('name', 'state_id')->toArray();
         $this->countries = Countries::pluck('name', 'country_id')->toArray();

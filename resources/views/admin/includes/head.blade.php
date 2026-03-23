@@ -9,7 +9,6 @@
     <!-- TITLE -->
     <title>@yield('title') - {{ config('app.name') }}</title>
 
-    <link rel="stylesheet" href="{{ asset('vendor/wire-elements-pro/css/bootstrap-overlay-component.css') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
     <x-embed-styles/>

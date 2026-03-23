@@ -6,22 +6,49 @@ use App\Models\Properties;
 use App\Models\Property_images;
 use Illuminate\Http\File;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\On;
+use Livewire\Component;
 use Livewire\WithFileUploads;
-use WireElements\Pro\Components\Modal\Modal;
 
-class AddNewImage extends Modal
+class AddNewImage extends Component
 {
     use LivewireAlert;
     use WithFileUploads;
+
+    public bool $show = false;
 
     public $property;
 
     public $thumbnail;
 
+    #[On('open-photo-add')]
+    public function openModal(int $propertyId): void
+    {
+        $this->property = Properties::find($propertyId);
+        $this->show = true;
+    }
+
+    public function closeModal(): void
+    {
+        $this->show = false;
+        $this->reset('thumbnail');
+    }
+
     public function save()
     {
+        // Validate files server-side
+        $this->validate([
+            'thumbnail.*' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:20480',
+        ]);
+
         if (is_array($this->thumbnail)) {
             foreach ($this->thumbnail as $file) {
+                // Additional MIME type verification
+                if (!$this->validateMimeType($file, ['image/jpeg', 'image/png', 'image/gif', 'image/webp'])) {
+                    $this->alert('error', 'Invalid file type detected. Only image files are allowed.');
+                    return;
+                }
+
                 $image = new File($file['path']);
                 $path = uploadS3Image('property_images', $image);
 				$thumb_path = uploadS3ImageThumb('property_images_thumb', $image, env('THUMB_WIDTH'));
@@ -48,12 +75,20 @@ class AddNewImage extends Modal
         $this->alert('success', 'Image added successfully.');
 
         $this->dispatch('refresh');
-        $this->close();
+        $this->show = false;
+        $this->reset('thumbnail');
     }
 
-    public function mount(Properties $property)
+    /**
+     * Validate file MIME type to prevent spoofing
+     */
+    private function validateMimeType($file, array $allowedMimeTypes): bool
     {
-        $this->property = $property;
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mimeType = finfo_file($finfo, $file['path']);
+        finfo_close($finfo);
+
+        return in_array($mimeType, $allowedMimeTypes);
     }
 
     public function render()

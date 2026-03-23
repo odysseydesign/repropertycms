@@ -15,6 +15,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'address' => env('APP_ADDRESS', ''),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -195,7 +197,6 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        WireElements\Pro\Components\Modal\ModalServiceProvider::class,
 
         /*
          * Package Service Providers...

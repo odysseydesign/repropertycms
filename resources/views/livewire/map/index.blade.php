@@ -1,7 +1,7 @@
 <div class="w-full">
     <div class="d-flex align-items-center justify-content-between my-4 flex-wrap page-heading">
         <h5></h5>
-        <button onclick="Livewire.dispatch('modal.open', {component: 'map.update-map', arguments: { 'property': {{ $property->id }} } })"
+        <button onclick="Livewire.dispatch('open-update-map', { propertyId: {{ $property->id }} })"
                 class="btn-blue m-0">
             <i class="fa fa-plus mr-1"></i> Update Map
         </button>

@@ -31,15 +31,22 @@ class PropertyImagesController extends Controller
     {
         $data = [];
         $validator = Validator::make($request->all(), [
-            'file' => 'required|mimes:png,jpg,jpeg',
+            'file'        => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:20480',
             'property_id' => 'required',
         ]);
-        //echo "<pre/>"; print_r($request->all());
         $property_id = $request['property_id'];
         if ($validator->fails()) {
             $data['success'] = 0;
             $data['error'] = $validator->errors()->first('file'); // Error response
         } else {
+            // Deep MIME type verification
+            $finfo    = finfo_open(FILEINFO_MIME_TYPE);
+            $mimeType = finfo_file($finfo, $request->file->getRealPath());
+            finfo_close($finfo);
+
+            if (!in_array($mimeType, ['image/jpeg', 'image/png', 'image/gif', 'image/webp'])) {
+                return response()->json(['success' => 0, 'error' => 'Invalid file type detected. Only image files are allowed.']);
+            }
             // Upload image on S3
 
             $path = uploadS3Image('property_images', $request->file);
@@ -157,7 +164,10 @@ class PropertyImagesController extends Controller
                 $image = readfile($assetPath); */
                 $image_path = public_path().'/files/property_images/';
 
-                $ext = pathinfo($property_image->file_name, PATHINFO_EXTENSION);
+                $ext = strtolower(pathinfo($property_image->file_name, PATHINFO_EXTENSION));
+                if (!in_array($ext, ['jpg', 'jpeg', 'png', 'gif'])) {
+                    return response()->json(['error' => 'Unsupported image format.'], 422);
+                }
                 $url = $property_image->file_name;
                 $image_file = 'new_rotate.'.$ext;
                 $image = public_path().'/files/property_images/new_rotate.'.$ext;

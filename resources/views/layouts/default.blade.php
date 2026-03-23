@@ -60,7 +60,6 @@
         })();
 
     </script>
-    <link rel="stylesheet" href="{{ asset('vendor/wire-elements-pro/css/bootstrap-overlay-component.css') }}">
     @livewireStyles
     <script>
         // try {
@@ -103,8 +102,6 @@
 
 </div>
 @stack('scripts')
-<script src="{{ asset('vendor/wire-elements-pro/js/overlay-component.js') }}"></script>
-@livewire('modal-pro')
 <script src="{{ asset('plugins/magnific-popup.min.js')}}"></script>
 <script>
     $(function () {

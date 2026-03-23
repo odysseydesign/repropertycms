@@ -1,9 +1,9 @@
-<div>
+<div x-data="{ confirmId: null }">
     <div class="image_gallery_wrap mt-4">
         <div class="d-flex align-items-center justify-content-between my-4 flex-wrap page-heading">
             <h5 class="mb-0">Property Images</h5>
             <a href="#"
-               onclick="Livewire.dispatch('modal.open', {component: 'photo-library.add-new-image', arguments: { 'property': {{ $property->id }} } })"
+               onclick="Livewire.dispatch('open-photo-add', { propertyId: {{ $property->id }} })"
                class="btn-blue m-0">
                 <i class="fa fa-plus mr-1"></i> Add New Images
             </a>
@@ -19,7 +19,7 @@
                                 class="fa fa-rotate mr-5 ml-2 mt-3 text-green-500"></i></a>
 
                     <a href="#" title="Delete Image" class="float-right"
-                       wire:click="deleteImage({{ $property_image->id }})"><i
+                       @click.prevent="confirmId = {{ $property_image->id }}"><i
                                 class="fa fa-times mr-5 ml-2 mt-3 text-red-600"></i></a>
                 </div>
             @endforeach
@@ -62,6 +62,21 @@
                 <button class="button button-green rotateImg" onclick="saveImageRotate()" data-ripple-light="true">Save
                     And Close
                 </button>
+            </div>
+        </div>
+    </div>
+
+    {{-- Delete Confirmation Overlay --}}
+    <div x-show="confirmId !== null" x-cloak style="position:fixed;inset:0;z-index:9999;">
+        <div style="position:absolute;inset:0;background:rgba(0,0,0,0.5);" @click="confirmId = null"></div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+            <div style="position:relative;background:white;border-radius:12px;max-width:400px;width:90%;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,0.2);">
+                <h3 style="font-size:1.1rem;font-weight:600;margin-bottom:12px;">Delete Image</h3>
+                <p style="color:#6b7280;margin-bottom:20px;">Are you sure you want to delete this image? This action cannot be undone.</p>
+                <div style="display:flex;gap:8px;justify-content:flex-end;">
+                    <button type="button" @click="confirmId = null" class="button button-grey">Cancel</button>
+                    <button type="button" @click="$wire.doDeleteImage(confirmId); confirmId = null" class="button button-red">Delete</button>
+                </div>
             </div>
         </div>
     </div>

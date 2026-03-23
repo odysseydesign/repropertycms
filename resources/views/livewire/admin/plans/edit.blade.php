@@ -1,8 +1,8 @@
 <div>
     <style>
-        .plan-ibtn{padding:11px!important;border-radius:9px!important;font-size:13px!important;font-weight:600!important;cursor:pointer!important;transition:all 0.15s!important;border:2px solid #e5e7eb!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:6px!important;background:white!important;color:#6b7280!important;box-shadow:none!important;width:100%!important;}
-        .plan-ibtn.ibtn-monthly{background:#4f46e5!important;color:white!important;border-color:#4f46e5!important;box-shadow:0 2px 8px rgba(79,70,229,0.3)!important;}
-        .plan-ibtn.ibtn-yearly{background:#7c3aed!important;color:white!important;border-color:#7c3aed!important;box-shadow:0 2px 8px rgba(124,58,237,0.3)!important;}
+        .plan-ibtn-ro{padding:11px!important;border-radius:9px!important;font-size:13px!important;font-weight:600!important;border:2px solid #e5e7eb!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:6px!important;width:100%!important;cursor:default!important;}
+        .plan-ibtn-ro.ro-monthly{background:#eef2ff!important;color:#4338ca!important;border-color:#c7d2fe!important;}
+        .plan-ibtn-ro.ro-yearly{background:#fdf4ff!important;color:#7e22ce!important;border-color:#e9d5ff!important;}
     </style>
     {{-- Modal overlay — driven by Livewire's $show property --}}
     <div x-data x-show="$wire.show" x-cloak
@@ -29,12 +29,12 @@
                 <div style="display:flex;align-items:center;gap:12px;">
                     <div style="width:40px;height:40px;background:rgba(255,255,255,0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
                         <svg style="width:20px;height:20px;color:white;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                         </svg>
                     </div>
                     <div>
-                        <div style="font-size:15px;font-weight:700;color:white;">Create New Plan</div>
-                        <div style="font-size:12px;color:rgba(255,255,255,0.75);">Synced to Stripe automatically</div>
+                        <div style="font-size:15px;font-weight:700;color:white;">Edit Plan</div>
+                        <div style="font-size:12px;color:rgba(255,255,255,0.75);">Changes sync to Stripe automatically</div>
                     </div>
                 </div>
                 <button type="button" @click="$wire.closeModal()"
@@ -89,26 +89,22 @@
                     </div>
                 </div>
 
-                {{-- Billing Interval --}}
+                {{-- Billing Interval (read-only display) --}}
                 <div style="margin-bottom:20px;">
-                    <label style="display:block;font-size:11px;font-weight:700;color:#374151;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.06em;">Billing Interval</label>
+                    <label style="display:block;font-size:11px;font-weight:700;color:#9ca3af;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.06em;">Billing Interval (locked)</label>
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-                        <button type="button" wire:click="$set('interval', 'month')"
-                                class="plan-ibtn"
-                                :class="$wire.interval === 'month' ? 'ibtn-monthly' : ''">
+                        <div class="plan-ibtn-ro {{ $interval === 'month' ? 'ro-monthly' : '' }}"
+                             style="{{ $interval !== 'month' ? 'opacity:0.4;' : '' }}">
                             <svg style="width:14px;height:14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                             Monthly
-                        </button>
-                        <button type="button" wire:click="$set('interval', 'year')"
-                                class="plan-ibtn"
-                                :class="$wire.interval === 'year' ? 'ibtn-yearly' : ''">
+                        </div>
+                        <div class="plan-ibtn-ro {{ $interval === 'year' ? 'ro-yearly' : '' }}"
+                             style="{{ $interval !== 'year' ? 'opacity:0.4;' : '' }}">
                             <svg style="width:14px;height:14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                             Yearly
-                        </button>
+                        </div>
                     </div>
-                    @error('interval')
-                        <span style="font-size:11px;color:#dc2626;margin-top:4px;display:block;">{{ $message }}</span>
-                    @enderror
+                    <p style="font-size:11px;color:#9ca3af;margin-top:6px;">Price and interval cannot be changed after creation. Create a new plan instead.</p>
                 </div>
 
                 {{-- Stripe notice --}}
@@ -116,7 +112,7 @@
                     <svg style="width:15px;height:15px;color:#7c3aed;flex-shrink:0;margin-top:1px;" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.591-7.305z"/>
                     </svg>
-                    <span style="font-size:12px;color:#5b21b6;line-height:1.5;">This plan will be created in your connected Stripe account immediately upon saving.</span>
+                    <span style="font-size:12px;color:#5b21b6;line-height:1.5;">Name changes update the Stripe product. If the price changes, a new Stripe price is created and the old one is removed. Credits are local only.</span>
                 </div>
 
                 {{-- Footer buttons --}}
@@ -129,10 +125,10 @@
                     <button type="button" wire:click="save" wire:loading.attr="disabled"
                             style="display:inline-flex;align-items:center;gap:7px;padding:10px 24px;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:white;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;transition:opacity 0.15s;"
                             wire:loading.class="opacity-50">
-                        <svg wire:loading.remove wire:target="save" style="width:14px;height:14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
-                        <span wire:loading.remove wire:target="save">Create Plan</span>
+                        <svg wire:loading.remove wire:target="save" style="width:14px;height:14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                        <span wire:loading.remove wire:target="save">Update Plan</span>
                         <svg wire:loading wire:target="save" style="width:14px;height:14px;animation:spin 1s linear infinite;" fill="none" viewBox="0 0 24 24"><circle style="opacity:0.25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path style="opacity:0.75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
-                        <span wire:loading wire:target="save">Creating...</span>
+                        <span wire:loading wire:target="save">Updating...</span>
                     </button>
                 </div>
 

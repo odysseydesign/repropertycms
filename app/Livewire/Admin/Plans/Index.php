@@ -7,48 +7,78 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Stripe\Plan as StripePlan;
+use Stripe\Product as StripeProduct;
 use Stripe\Stripe;
-use WireElements\Pro\Concerns\InteractsWithConfirmationModal;
 
 #[On('refresh')]
 class Index extends Component
 {
-    use InteractsWithConfirmationModal;
     use LivewireAlert;
 
     public function deletePlan($id)
     {
-        $this->askForConfirmation(
-            callback: function () use ($id) {
-                $plan = Plan::find($id);
-                try {
-                    Stripe::setApiKey(config('stripe.api_keys.secret_key'));
-                    StripePlan::retrieve($plan->stripe_plan_id)->delete();
+        $plan = Plan::find($id);
 
-                    $plan->delete();
+        if (! $plan) {
+            $this->alert('error', 'Plan not found.');
 
-                    $this->alert('success', __('Plan deleted successfully.'));
+            return;
+        }
 
-                    $this->dispatch('refresh');
+        try {
+            Stripe::setApiKey(config('stripe.api_keys.secret_key'));
+            StripePlan::retrieve($plan->stripe_plan_id)->delete();
+            $plan->delete();
 
-                } catch (\Exception $e) {
+            $this->alert('success', 'Plan deleted successfully.');
+            $this->dispatch('refresh');
 
-                    $this->alert('error', $e->getMessage());
+        } catch (\Exception $e) {
+            $this->alert('error', $e->getMessage());
+        }
+    }
+
+    public function syncFromStripe()
+    {
+        try {
+            Stripe::setApiKey(config('stripe.api_keys.secret_key'));
+
+            $stripePlans = StripePlan::all(['limit' => 100]);
+            $updated = 0;
+            $created = 0;
+
+            foreach ($stripePlans->data as $sp) {
+                $product = StripeProduct::retrieve($sp->product);
+                $interval = $sp->interval ?? 'month';
+                $amount = ($sp->amount ?? 0) / 100;
+
+                $local = Plan::where('stripe_plan_id', $sp->id)->first();
+
+                if ($local) {
+                    $local->update([
+                        'name'     => $product->name,
+                        'price'    => $amount,
+                        'interval' => $interval,
+                    ]);
+                    $updated++;
+                } else {
+                    Plan::create([
+                        'name'           => $product->name,
+                        'price'          => $amount,
+                        'stripe_plan_id' => $sp->id,
+                        'interval'       => $interval,
+                        'credits'        => 0,
+                    ]);
+                    $created++;
                 }
-            },
-            prompt: [
-                'title' => __('Delete Plan'),
-                'message' => __('Are you sure you want to delete this plan?'),
-                'confirm' => __('Yes, Delete'),
-                'cancel' => __('Stop'),
-            ],
-            modalAttributes: [
-                'size' => '2xl',
-            ]
-        );
+            }
 
-        $this->dispatch('refresh');
+            $this->dispatch('refresh');
+            $this->alert('success', "Sync complete: {$updated} updated, {$created} imported from Stripe.");
 
+        } catch (\Exception $e) {
+            $this->alert('error', $e->getMessage());
+        }
     }
 
     public function render()

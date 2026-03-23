@@ -126,3 +126,67 @@ function getVimeoThumbnail(string $videoUrl): string
 
     return '';
 }
+
+/**
+ * Validate file MIME type to prevent spoofing attacks
+ */
+function validateFileMimeType($file, array $allowedMimeTypes): bool
+{
+    $finfo = finfo_open(FILEINFO_MIME_TYPE);
+    $mimeType = finfo_file($finfo, $file->getRealPath());
+    finfo_close($finfo);
+
+    return in_array($mimeType, $allowedMimeTypes);
+}
+
+/**
+ * Sanitize filename to prevent path traversal and other attacks
+ */
+function sanitizeFilename(string $filename): string
+{
+    // Remove path traversal attempts
+    $filename = basename($filename);
+
+    // Remove potentially dangerous characters
+    $filename = preg_replace('/[^a-zA-Z0-9\._-]/', '_', $filename);
+
+    // Ensure filename is not too long
+    if (strlen($filename) > 255) {
+        $extension = pathinfo($filename, PATHINFO_EXTENSION);
+        $name = pathinfo($filename, PATHINFO_FILENAME);
+        $name = substr($name, 0, 250 - strlen($extension));
+        $filename = $name . '.' . $extension;
+    }
+
+    return $filename;
+}
+
+/**
+ * Check if file content is safe (basic check for malicious patterns)
+ */
+function isFileContentSafe($file): bool
+{
+    $content = file_get_contents($file->getRealPath());
+
+    // Check for common malicious patterns
+    $maliciousPatterns = [
+        '<?php',
+        '<?=',
+        '<script',
+        'eval(',
+        'exec(',
+        'system(',
+        'shell_exec(',
+        'passthru(',
+        'popen(',
+        'proc_open('
+    ];
+
+    foreach ($maliciousPatterns as $pattern) {
+        if (stripos($content, $pattern) !== false) {
+            return false;
+        }
+    }
+
+    return true;
+}

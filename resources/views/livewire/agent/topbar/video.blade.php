@@ -2,7 +2,7 @@
     <div class="d-flex align-items-center justify-content-between my-4 flex-wrap page-heading">
         <h5 class="mb-0">Video Header</h5>
         <a href="#"
-           onclick="Livewire.dispatch('modal.open', {component: 'video.add', arguments: { 'property': {{ $property->id }} } })"
+           onclick="Livewire.dispatch('open-video-add', { propertyId: {{ $property->id }} })"
            class="btn-blue m-0">
             <i class="fa fa-plus mr-1"></i> Add Video
         </a>
@@ -32,7 +32,7 @@
                                 <img src="{{ getYoutubeThumbnail($property_video->video_url) }}"
                                      class="max-w-full h-auto">
                                 <a href="#"
-                                   onclick="Livewire.dispatch('modal.open', {component: 'video.view', arguments: { 'property': {{ $property->id }}, 'property_video': {{ $property_video->id }} } })">
+                                   onclick="Livewire.dispatch('open-video-view', { propertyId: {{ $property->id }}, videoId: {{ $property_video->id }} })">
                                 </a>
                             </div>
                         @elseif($property_video->video_type == \App\Enums\VideoType::Vimeo)
@@ -41,7 +41,7 @@
                                 <img src="{{ getVimeoThumbnail($property_video->video_url) }}"
                                      class="max-w-full h-auto">
                                 <a href="#"
-                                   onclick="Livewire.dispatch('modal.open', {component: 'video.view', arguments: { 'property': {{ $property->id }}, 'property_video': {{ $property_video->id }} } })">
+                                   onclick="Livewire.dispatch('open-video-view', { propertyId: {{ $property->id }}, videoId: {{ $property_video->id }} })">
                                 </a>
                             </div>
                         @else

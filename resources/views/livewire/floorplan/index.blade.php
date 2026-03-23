@@ -1,4 +1,4 @@
-<div>
+<div x-data="{ confirmId: null }">
     <div class="FloorPlan_wrap">
         <div class='content'>
             <div class="d-flex align-items-center justify-content-between my-4 flex-wrap page-heading">
@@ -50,7 +50,7 @@
                                 <button title="Delete Floor Plan"
                                         class="rounded-md text-xl text-red-500 border border-transparent py-2 px-4 text-center transition-all"
                                         type="button"
-                                        wire:click="deleteFloorplan({{ $property_floor->id }})"
+                                        @click="confirmId = {{ $property_floor->id }}"
                                         data-ripple-light="true"><i class="fa fa-times"></i>
                                 </button>
                                 <p class="my-1">Total No. of hotspots: {{ $property_floor->hotspots()->count() }}</p>
@@ -64,5 +64,20 @@
                 </li>
             @endforeach
         </ul>
+    </div>
+
+    {{-- Delete Confirmation Overlay --}}
+    <div x-show="confirmId !== null" x-cloak style="position:fixed;inset:0;z-index:9999;">
+        <div style="position:absolute;inset:0;background:rgba(0,0,0,0.5);" @click="confirmId = null"></div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+            <div style="position:relative;background:white;border-radius:12px;max-width:400px;width:90%;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,0.2);">
+                <h3 style="font-size:1.1rem;font-weight:600;margin-bottom:12px;">Delete Floor Plan</h3>
+                <p style="color:#6b7280;margin-bottom:20px;">Are you sure you want to delete this floor plan? This action cannot be undone.</p>
+                <div style="display:flex;gap:8px;justify-content:flex-end;">
+                    <button type="button" @click="confirmId = null" class="button button-grey">Cancel</button>
+                    <button type="button" @click="$wire.doDeleteFloorplan(confirmId); confirmId = null" class="button button-red">Delete</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
